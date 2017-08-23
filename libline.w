@@ -21,5 +21,7 @@ int main()
     return 0;
 }
 #endif
+@<Top@>@/
 
 @i header
+@i point

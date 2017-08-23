@@ -54,6 +54,7 @@ value.
 @<Header Data@>+=
 void ll_point_value(ll_point *pt, ll_flt val);
 void ll_point_dur(ll_point *pt, ll_flt dur);
+void ll_point_next_value(ll_point *pt, ll_flt *val);
 
 @ A point, once it is set, can be tacked on to the end of a line. The value 
 of this point becomes the end value of the previous point. 

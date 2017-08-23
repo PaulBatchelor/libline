@@ -1,8 +1,8 @@
-NAME=line
+NAME=libline
 
 default: $(NAME).pdf debug
 
-WEBFILES=$(NAME).w header.w
+WEBFILES=$(NAME).w header.w point.w
 
 CFLAGS = -Wall -ansi
 
