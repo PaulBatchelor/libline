@@ -14,9 +14,12 @@ it is used for debugging purposes.
 @c 
 #ifdef BUILD_MAIN
 #include <stdio.h>
+#include "line.h"
 int main()
 {
     printf("Hello libline.\n");
     return 0;
 }
 #endif
+
+@i header

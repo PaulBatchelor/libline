@@ -1,17 +1,21 @@
-NAME=libline
+NAME=line
 
-default: libline.pdf debug
+default: $(NAME).pdf debug
 
-debug: libline.c
-	$(CC) $< -DBUILD_MAIN -o $@
+WEBFILES=$(NAME).w header.w
 
-$(NAME).pdf: $(NAME).w
-	cweave -x $<
-	tex "\let\pdf+ \input libline"
+CFLAGS = -Wall -ansi
+
+debug: $(NAME).c
+	$(CC) $(CFLAGS) $< -DBUILD_MAIN -o $@
+
+$(NAME).pdf: $(WEBFILES)
+	cweave -x $(NAME).w
+	tex "\let\pdf+ \input $(NAME)"
 	dvipdfm $(NAME).dvi
 
-$(NAME).c: $(NAME).w
-	ctangle $<
+$(NAME).c: $(WEBFILES)
+	ctangle $(NAME).w
 
 clean:
 	rm -rf $(NAME).pdf
@@ -23,3 +27,4 @@ clean:
 	rm -rf $(NAME).toc
 	rm -rf $(NAME).tex
 	rm -rf debug
+	rm -rf line.h
