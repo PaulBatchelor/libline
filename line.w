@@ -142,8 +142,13 @@ through the linked list.
 @<The Line@> += 
 ll_flt ll_line_step(ll_line *ln)
 {
-    /* TODO: implement me please. */
-    return 0;
+    /* TODO: implement the rest of me please */
+    UINT dur;
+    UINT pos;
+
+    dur = ln->idur;
+    pos = dur - ln->counter;
+    return ll_point_step(ln->last, pos, dur);;
 }
 
 @ The functions described below are the default malloc and free functions
