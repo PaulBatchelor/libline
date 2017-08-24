@@ -33,7 +33,6 @@ justification for the "i" in the beginning of the variable.
 @ The line interface can handle memory allocation internally. It does so
 using callback interfaces for allocating and freeing memory. By default, these
 functions are wrappers around the standard C |malloc| and |free| functions. 
-More information on these wrappers can be seen in |@<Default Memory...@>|.
 @<The Line@> += 
     ll_cb_malloc malloc;
     ll_cb_free free;
@@ -54,19 +53,17 @@ size_t ll_line_size(void)
 
 @ After the line is allocated, it must be initialized. A line starts out
 with zero points. Pointers are set to be |NULL| ({\tt NULL}). The 
-memory allocation functions are set to the internal defaults defined 
-in |@<Default Memory...@>|.
+memory allocation functions are set to defaults.
 
 @<The Line@> += 
-@<Default Memory...@>@/
 void ll_line_init(ll_line *ln, int sr)
 {
     ln->root = NULL;
     ln->last = NULL;
     ln->size = 0;
     ln->sr = sr;
-    ln->malloc = line_malloc;
-    ln->free = line_free;
+    ln->malloc = ll_malloc;
+    ln->free = ll_free;
     ln->idur = 0;
     ln->pos = 0;
 }
@@ -147,16 +144,6 @@ ll_flt ll_line_step(ll_line *ln)
 @ The functions described below are the default malloc and free functions
 used internally by the line function. They are wrappers around the default
 C libraries. 
-@<Default Memory Allocation Functions@>=
-static void * line_malloc(void *ud, size_t size)
-{
-    return malloc(size);
-}
-
-static void line_free(void *ud, void *ptr)
-{
-    free(ptr);
-}
 
 @ Sometimes it is can be useful to print points in a line. |ll_line_print|  
 does just that, walking through the list and printing the values.

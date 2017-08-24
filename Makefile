@@ -2,7 +2,7 @@ NAME=libline
 
 default: $(NAME).pdf debug
 
-WEBFILES=$(NAME).w header.w point.w line.w
+WEBFILES=$(NAME).w header.w point.w line.w mem.w
 
 CFLAGS = -Wall -ansi
 

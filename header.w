@@ -35,6 +35,12 @@ they be overridden use custom memory handling functions.
 typedef void * (* ll_cb_malloc)(void *ud, size_t size);
 typedef void (* ll_cb_free)(void *ud, void *ptr);
 
+@ Default memory functions are implemented for line. They are simply wrappers
+for |malloc| and |free|.
+@<Header Data@>+=
+void * ll_malloc(void *ud, size_t size);
+void ll_free(void *ud, void *ptr);
+
 @ Compilers are unable to tell what size opaque pointers are, so functions
 need to be written which return the size. This also shifts the burden of 
 allocation onto the user. 
