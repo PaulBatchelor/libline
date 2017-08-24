@@ -18,11 +18,11 @@ sampling rate |sr|.
 @<The Line@> += 
     int sr;
 
-@ A position variable is used as a sample-accurate timer to navigate between 
+@ A counter variable is used as a sample-accurate timer to navigate between 
 sequential points.
 
 @<The Line@> += 
-    unsigned int pos;
+    unsigned int counter;
 
 @ The duration of the current point is in stored in the variable |idur|. This 
 unit of this duration is in whole-{\bf i}nteger samples, which is the 
@@ -65,7 +65,7 @@ void ll_line_init(ll_line *ln, int sr)
     ln->malloc = ll_malloc;
     ln->free = ll_free;
     ln->idur = 0;
-    ln->pos = 0;
+    ln->counter = 0;
 }
 
 @ Points are added to a line in chronological order because they are appended
@@ -133,7 +133,10 @@ void ll_line_free(ll_line *ln)
     }
 }
 
-@ Write some words here.
+@ This is the top-level function called inside the audio callback. It computes
+the line. This is done through both ticking down a timer and walking
+through the linked list. 
+
 @<The Line@> += 
 ll_flt ll_line_step(ll_line *ln)
 {
@@ -157,7 +160,7 @@ void ll_line_print(ll_line *ln)
     ll_flt *val;
    
     pt = ln->root;
-    printf("there are %d lines...\n", ln->size);
+    printf("there are %d points...\n", ln->size);
     for(i = 0; i < ln->size; i++) {
         next = pt->next;
         val = ll_point_get_value(pt);

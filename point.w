@@ -152,6 +152,7 @@ ll_flt ll_point_A(ll_point *pt)
 {
     return pt->A;
 }
+
 ll_flt ll_point_B(ll_point *pt)
 {
     return *pt->B;
