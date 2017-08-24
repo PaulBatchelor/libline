@@ -15,3 +15,8 @@ void ll_free(void *ud, void *ptr)
 {
     free(ptr);
 }
+
+void ll_free_nothing(void *ud, void *ptr)
+{
+
+}

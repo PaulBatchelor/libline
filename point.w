@@ -18,12 +18,25 @@ a reference to the next entry in the list.
     ll_point *next;
 
 @ Points have various styles of interpolation, and with that comes custom
-user data, and memory allocation.
+user data for the allocator, and memory allocation.
 
 @<The Point@>+=
     ll_cb_malloc malloc;
     ll_cb_free free;
     void *ud;
+
+@ Custom data needs to be freed in a general kind of way. This is another 
+free callback called destroy. This should be called before free.
+
+@<The Point@>+=
+    void *data;
+    ll_cb_free destroy;
+
+@ A step function computes a line segment local to the point. By default,
+this is set to return point A>
+@<The Point@>+=
+    ll_cb_step step;
+
 
 @/};
 
@@ -38,6 +51,7 @@ size_t ll_point_size(void)
 @ Initialization. Add some words here.
 
 @<The Point@>+=
+@<Default Step Function@>
 void ll_point_init(ll_point *pt)
 {
     pt->A = 1.0; /* A reasonable default value */
@@ -46,6 +60,9 @@ void ll_point_init(ll_point *pt)
     pt->ud = NULL;
     pt->free = ll_free;
     pt->malloc = ll_malloc;
+    pt->data = NULL;
+    pt->destroy = ll_free_nothing;
+    pt->step = step;
 }
 
 @ Set the initial "A" value. 
@@ -110,4 +127,32 @@ void *ll_point_malloc(ll_point *pt, size_t size)
 void ll_point_free(ll_point *pt, void *ptr)
 {
     pt->free(pt->ud, ptr);
+}
+
+@ Data allocated by the interpolator is {\it destroyed} using the internal
+free function. 
+@<The Point@>+=
+void ll_point_destroy(ll_point *pt)
+{
+    pt->destroy(pt, pt->data);
+}
+
+
+@ The default step function simply returns point A.
+@<Default Step Function@>=
+static ll_flt step(ll_point *pt, void *ud, UINT pos, UINT dur)
+{
+    return ll_point_A(pt);
+}
+
+@ These functions return the A and B values in the point struct, and 
+are particularly useful for interpolation functions.
+@<The Point@>+=
+ll_flt ll_point_A(ll_point *pt)
+{
+    return pt->A;
+}
+ll_flt ll_point_B(ll_point *pt)
+{
+    return *pt->B;
 }
