@@ -22,7 +22,7 @@ sampling rate |sr|.
 sequential points.
 
 @<The Line@> += 
-    unsigned int point;
+    unsigned int pos;
 
 @ The duration of the current point is in stored in the variable |idur|. This 
 unit of this duration is in whole-{\bf i}nteger samples, which is the 
@@ -35,8 +35,8 @@ using callback interfaces for allocating and freeing memory. By default, these
 functions are wrappers around the standard C |malloc| and |free| functions. 
 More information on these wrappers can be seen in |@<Default Memory...@>|.
 @<The Line@> += 
-    ll_line_cb_malloc malloc;
-    ll_line_cb_free free;
+    ll_cb_malloc malloc;
+    ll_cb_free free;
 
 @ The struct also has an entry for custom user data, defined as a void 
 pointer |ud|.
@@ -108,7 +108,7 @@ ll_point * ll_line_append(ll_line *ln, ll_flt val, ll_flt dur)
 {
     ll_point *pt;
 
-    pt = ln->malloc(ln, ln->ud, ll_point_size());
+    pt = ln->malloc(ln->ud, ll_point_size());
 
     ll_point_value(pt, val);
     ll_point_dur(pt, dur);
@@ -131,7 +131,7 @@ void ll_line_free(ll_line *ln)
     pt = ln->root;
     for(i = 0; i < ln->size; i++) {
         next = pt->next;
-        ln->free(ln, ln->ud, pt);
+        ln->free(ln->ud, pt);
         pt = next;
     }
 }
@@ -148,12 +148,12 @@ ll_flt ll_line_step(ll_line *ln)
 used internally by the line function. They are wrappers around the default
 C libraries. 
 @<Default Memory Allocation Functions@>=
-static void * line_malloc(ll_line *ln, void *ud, size_t size)
+static void * line_malloc(void *ud, size_t size)
 {
     return malloc(size);
 }
 
-static void line_free(ll_line *ln, void *ud, void *ptr)
+static void line_free(void *ud, void *ptr)
 {
     free(ptr);
 }

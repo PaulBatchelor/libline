@@ -32,8 +32,8 @@ are just wrappers around malloc free. However, this is designed so that
 they be overridden use custom memory handling functions.
 
 @<Header Data@>+=
-typedef void * (* ll_line_cb_malloc)(ll_line *, void *ud, size_t size);
-typedef void (* ll_line_cb_free)(ll_line *, void *ud, void *ptr);
+typedef void * (* ll_cb_malloc)(void *ud, size_t size);
+typedef void (* ll_cb_free)(void *ud, void *ptr);
 
 @ Compilers are unable to tell what size opaque pointers are, so functions
 need to be written which return the size. This also shifts the burden of 
@@ -99,7 +99,7 @@ void ll_line_free(ll_line *ln);
 @ For situations where custom memory allocation is desired, the default 
 callbacks for memory can be overridden.
 @<Header Data@>+=
-void ll_line_mem_callback(ll_line *ln, ll_line_cb_malloc m, ll_line_cb_free f);
+void ll_line_mem_callback(ll_line *ln, ll_cb_malloc m, ll_cb_free f);
 
 
 @ Once all points have been added, the line is finalized and rewound to the
