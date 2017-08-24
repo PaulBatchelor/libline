@@ -40,6 +40,8 @@ for |malloc| and |free|.
 @<Header Data@>+=
 void * ll_malloc(void *ud, size_t size);
 void ll_free(void *ud, void *ptr);
+void *ll_point_malloc(ll_point *pt, size_t size);
+void ll_point_free(ll_point *pt, void *ptr);
 
 @ Compilers are unable to tell what size opaque pointers are, so functions
 need to be written which return the size. This also shifts the burden of 

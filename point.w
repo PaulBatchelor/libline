@@ -15,8 +15,17 @@ struct ll_point {@/
 a reference to the next entry in the list. 
 
 @<The Point@>+=
-    ll_point *next;@/
-};
+    ll_point *next;
+
+@ Points have various styles of interpolation, and with that comes custom
+user data, and memory allocation.
+
+@<The Point@>+=
+    ll_cb_malloc malloc;
+    ll_cb_free free;
+    void *ud;
+
+@/};
 
 @ The size of the point struct is implemented as a function.
 
@@ -34,13 +43,15 @@ void ll_point_init(ll_point *pt)
     pt->A = 1.0; /* A reasonable default value */
     pt->dur = 1.0; /* A one-second duration by default */
     pt->B = &pt->A; /* Point B points to point A by default */
+    pt->ud = NULL;
+    pt->free = ll_free;
+    pt->malloc = ll_malloc;
 }
 
 @ Set the initial "A" value. 
 @<The Point@>+=
 void ll_point_value(ll_point *pt, ll_flt val)
 {
-
     pt->A = val;
 }
 
@@ -86,4 +97,17 @@ A value.
 ll_flt * ll_point_get_value(ll_point *pt)
 {
     return &pt->A;
+}
+
+@ Various interpolation styles will require the ability to allocate memory.
+For this reason, the memory allocation functions must be exposed. 
+
+@<The Point@>+=
+void *ll_point_malloc(ll_point *pt, size_t size)
+{
+    return pt->malloc(pt->ud, size);
+}
+void ll_point_free(ll_point *pt, void *ptr)
+{
+    pt->free(pt->ud, ptr);
 }
