@@ -54,7 +54,26 @@ value.
 @<Header Data@>+=
 void ll_point_value(ll_point *pt, ll_flt val);
 void ll_point_dur(ll_point *pt, ll_flt dur);
-void ll_point_next_value(ll_point *pt, ll_flt *val);
+
+@ Points have a {\it next} value, referencing the next point value.
+@<Header Data@>+=
+void ll_point_set_next_value(ll_point *pt, ll_flt *val);
+
+@ In order to set the next value, there must be a function which is able
+to return the memory address of the previous point value (not the next value).
+@<Header Data@>+=
+ll_flt * ll_point_get_value(ll_point *pt);
+
+@ Points also act as a linked list, so they also contain a pointer to the next
+entry.
+@<Header Data@>+=
+void ll_point_set_next_point(ll_point *pt, ll_point *next);
+
+@ The linked list must be read as well written to, so a function is needed to
+retrieve the next point in the linked list.
+
+@<Header Data@>+=
+ll_point * ll_point_get_next_point(ll_point *pt);
 
 @ A point, once it is set, can be tacked on to the end of a line. The value 
 of this point becomes the end value of the previous point. 

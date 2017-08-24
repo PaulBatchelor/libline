@@ -12,6 +12,7 @@ Things have to start somewhere, so here is program that says hello. The
 library, it is favorable to turn on presence of the main function only when
 it is used for debugging purposes. 
 @c 
+#include <stdlib.h>
 #ifdef BUILD_MAIN
 #include <stdio.h>
 #include "line.h"
