@@ -134,7 +134,6 @@ beginning, where it can be ready to be computed as an audio-rate signal
 in time.
 
 @<Header Data@>+=
-void ll_line_rewind(ll_line *ln);
 void ll_line_done(ll_line *ln);
 
 

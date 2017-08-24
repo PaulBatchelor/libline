@@ -21,8 +21,9 @@ int main()
     ll_line *line;
     line = malloc(ll_line_size());
     ll_line_init(line, 44100);
-    ll_line_append(line, 1.0, 2.0);
-    ll_line_append(line, 3.0, 4.0);
+    ll_line_append(line, 440.0, 2.0);
+    ll_line_append(line, 880.0, 4.0);
+    ll_line_done(line);
     ll_line_print(line);
     ll_line_free(line);
     free(line);

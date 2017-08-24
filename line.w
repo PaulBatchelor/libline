@@ -11,6 +11,7 @@ struct ll_line {@/
     ll_point *root;
     ll_point *last;
     int size;
+    int curpoint; /* the current point */
 
 @ Since the line generated is a digital audio signal, it must have a 
 sampling rate |sr|.
@@ -66,6 +67,7 @@ void ll_line_init(ll_line *ln, int sr)
     ln->free = ll_free;
     ln->idur = 0;
     ln->counter = 0;
+    ln->curpoint = 0;
 }
 
 @ Points are added to a line in chronological order because they are appended
@@ -172,4 +174,16 @@ void ll_line_print(ll_line *ln)
 
         pt = next;
     }
+}
+
+@ Once points are doing being added to a line, it must be rewound and reset
+to the beginning.
+
+@<The Line@>+=
+void ll_line_done(ll_line *ln)
+{
+    ln->curpoint = 0;
+    ln->last = ln->root;
+    ln->idur = ll_point_get_dur(ln->root) * ln->sr;
+    ln->counter = ln->idur;
 }
