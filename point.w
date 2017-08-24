@@ -157,3 +157,9 @@ ll_flt ll_point_B(ll_point *pt)
 {
     return *pt->B;
 }
+@ This calls the step function inside of the point.
+@<The Point@>+=
+ll_flt ll_point_step(ll_point *pt, UINT pos, UINT dur)
+{
+    return pt->step(pt, pt->data, pos, dur);
+}

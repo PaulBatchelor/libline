@@ -103,6 +103,10 @@ retrieve the next point in the linked list.
 @<Header Data@>+=
 ll_point * ll_point_get_next_point(ll_point *pt);
 
+@ This is calls the step function inside of a point.
+@<Header Data@>+=
+ll_flt ll_point_step(ll_point *pt, UINT pos, UINT dur);
+
 @ A point, once it is set, can be tacked on to the end of a line. The value 
 of this point becomes the end value of the previous point. 
 @<Header Data@>+=
