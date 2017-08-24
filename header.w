@@ -54,6 +54,7 @@ value.
 @<Header Data@>+=
 void ll_point_value(ll_point *pt, ll_flt val);
 void ll_point_dur(ll_point *pt, ll_flt dur);
+ll_flt ll_point_get_dur(ll_point *pt);
 
 @ Points have a {\it next} value, referencing the next point value.
 @<Header Data@>+=
@@ -116,3 +117,7 @@ in time by a single sample.
 @<Header Data@>+=
 ll_flt ll_line_step(ll_line *ln);
 
+
+@ This function will print all the points in a given line.
+@<Header Data@>+=
+void ll_line_print(ll_line *ln);

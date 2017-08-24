@@ -44,6 +44,7 @@ void ll_point_value(ll_point *pt, ll_flt val)
     pt->A = val;
 }
 
+
 @ This sets the point of the "B" value. Note that this is a pointer value.
 
 @<The Point@>+=
@@ -57,6 +58,11 @@ void ll_point_set_next_value(ll_point *pt, ll_flt *val)
 void ll_point_dur(ll_point *pt, ll_flt dur)
 {
     pt->dur = dur;
+}
+
+ll_flt ll_point_get_dur(ll_point *pt)
+{
+    return pt->dur;
 }
 
 @ The following function is used to set the next entry in the linked list.

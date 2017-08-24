@@ -155,3 +155,29 @@ static void line_free(ll_line *ln, void *ud, void *ptr)
 {
     free(ptr);
 }
+
+@ Sometimes it is can be useful to print points in a line. |ll_line_print|  
+does just that, walking through the list and printing the values.
+
+@<The Line@> += 
+void ll_line_print(ll_line *ln)
+{
+    ll_point *pt;
+    ll_point *next;
+    unsigned int i;
+    ll_flt *val;
+   
+    pt = ln->root;
+    printf("there are %d lines...\n", ln->size);
+    for(i = 0; i < ln->size; i++) {
+        next = pt->next;
+        val = ll_point_get_value(pt);
+        printf("point %d: dur %g, val %g\n", 
+            i,
+            ll_point_get_dur(pt),
+            *val
+            );
+
+        pt = next;
+    }
+}
