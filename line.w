@@ -18,11 +18,11 @@ sampling rate |sr|.
 @<The Line@> += 
     int sr;
 
-@ A counter variable is used as a sample-accurate timer to navigate between 
+@ A position variable is used as a sample-accurate timer to navigate between 
 sequential points.
 
 @<The Line@> += 
-    unsigned int counter;
+    unsigned int point;
 
 @ The duration of the current point is in stored in the variable |idur|. This 
 unit of this duration is in whole-{\bf i}nteger samples, which is the 
@@ -67,6 +67,8 @@ void ll_line_init(ll_line *ln, int sr)
     ln->sr = sr;
     ln->malloc = line_malloc;
     ln->free = line_free;
+    ln->idur = 0;
+    ln->pos = 0;
 }
 
 @ Points are added to a line in chronological order because they are appended
