@@ -21,4 +21,3 @@ it is used for debugging purposes.
 @i point
 @i line
 @i mem
-@i debug

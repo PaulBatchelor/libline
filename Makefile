@@ -37,4 +37,3 @@ clean:
 	rm -rf $(NAME).a
 	rm -rf debug
 	rm -rf line.h
-	rm -rf debug.c
