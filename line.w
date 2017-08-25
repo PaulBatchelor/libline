@@ -42,6 +42,11 @@ functions are wrappers around the standard C |malloc| and |free| functions.
 pointer |ud|.
 @<The Line@> += 
     void *ud;
+
+@ The variable |end| is a boolean value that is set when the line reaches
+the end. 
+@<The Line@> += 
+    int end;
 @/};
 
 @ The size of |ll_line| is implemented as a function.
@@ -68,6 +73,7 @@ void ll_line_init(ll_line *ln, int sr)
     ln->idur = 0;
     ln->counter = 0;
     ln->curpos = 0;
+    ln->end = 0;
 }
 
 @ Points are added to a line in chronological order because they are appended
@@ -156,12 +162,18 @@ ll_flt ll_line_step(ll_line *ln)
     UINT dur;
     UINT pos;
 
+    if(ln->end) {
+        return ll_point_A(ln->last);    
+    }
+
     if(ln->counter == 0) {
         if(ln->curpos < ln->size) {
             ln->last = ll_point_get_next_point(ln->last);
             ln->idur = ll_point_get_dur(ln->last) * ln->sr;
             ln->counter = ln->idur;
             ln->curpos++;
+        } else {
+            ln->end = 1;
         }
     }
 
@@ -211,4 +223,5 @@ void ll_line_done(ll_line *ln)
     ln->last = ln->root;
     ln->idur = ll_point_get_dur(ln->root) * ln->sr;
     ln->counter = ln->idur;
+    ln->end = 0;
 }
