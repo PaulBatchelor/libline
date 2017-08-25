@@ -4,16 +4,18 @@ default: $(NAME).pdf $(NAME).a debug
 
 WEBFILES=$(NAME).w header.w point.w line.w mem.w debug.w
 
-CFLAGS = -Wall -ansi
+LDFLAGS=-lsoundpipe -lsndfile -lm
+
+CFLAGS = -Wall -ansi -g
 
 %.o: %.c
-	$(CC) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME).a: $(NAME).o
 	$(AR) rcs $@ $(NAME).o
 
 debug: $(NAME).o 
-	$(CC) $(CFLAGS) debug.c -o $@ $(NAME).o
+	$(CC) $(CFLAGS) debug.c -o $@ $(NAME).o $(LDFLAGS)
 
 $(NAME).pdf: $(WEBFILES)
 	cweave -x $(NAME).w

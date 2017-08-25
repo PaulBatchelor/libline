@@ -109,6 +109,7 @@ ll_point * ll_line_append(ll_line *ln, ll_flt val, ll_flt dur)
 
     pt = ln->malloc(ln->ud, ll_point_size());
 
+    ll_point_init(pt);
     ll_point_value(pt, val);
     ll_point_dur(pt, dur);
 
@@ -129,7 +130,7 @@ void ll_line_free(ll_line *ln)
    
     pt = ln->root;
     for(i = 0; i < ln->size; i++) {
-        next = pt->next;
+        next = ll_point_get_next_point(pt);
         ln->free(ln->ud, pt);
         pt = next;
     }
@@ -139,6 +140,15 @@ void ll_line_free(ll_line *ln)
 the line. This is done through both ticking down a timer and walking
 through the linked list. 
 
+First, there is a check to see if the counter has ticked to zero. 
+If it has, the line goes to the next point in the next list. 
+
+If there are no points left in the list, the line has ended, and the output 
+value is the "A" value of the point.
+
+If the line is not at the end, then it will step to the next point in the 
+linked list. The timer is then reset, and the current position is incremented.
+
 @<The Line@> += 
 ll_flt ll_line_step(ll_line *ln)
 {
@@ -146,8 +156,18 @@ ll_flt ll_line_step(ll_line *ln)
     UINT dur;
     UINT pos;
 
+    if(ln->counter == 0) {
+        if(ln->curpos < ln->size) {
+            ln->last = ll_point_get_next_point(ln->last);
+            ln->idur = ll_point_get_dur(ln->last) * ln->sr;
+            ln->counter = ln->idur;
+            ln->curpos++;
+        }
+    }
+
     dur = ln->idur;
     pos = dur - ln->counter;
+    ln->counter--;
     return ll_point_step(ln->last, pos, dur);;
 }
 
@@ -169,7 +189,7 @@ void ll_line_print(ll_line *ln)
     pt = ln->root;
     printf("there are %d points...\n", ln->size);
     for(i = 0; i < ln->size; i++) {
-        next = pt->next;
+        next = ll_point_get_next_point(pt);
         val = ll_point_get_value(pt);
         printf("point %d: dur %g, val %g\n", 
             i,

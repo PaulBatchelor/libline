@@ -14,22 +14,7 @@ it is used for debugging purposes.
 @c 
 #include <stdlib.h>
 #include <stdio.h>
-#include "line.h"
-#ifdef BUILD_MAIN
-int main()
-{
-    ll_line *line;
-    line = malloc(ll_line_size());
-    ll_line_init(line, 44100);
-    ll_line_append(line, 440.0, 2.0);
-    ll_line_append(line, 880.0, 4.0);
-    ll_line_done(line);
-    ll_line_print(line);
-    ll_line_free(line);
-    free(line);
-    return 0;
-}
-#endif
+#include "line.h"@/
 @<Top@>@/
 
 @i header
