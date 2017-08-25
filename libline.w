@@ -36,3 +36,4 @@ int main()
 @i point
 @i line
 @i mem
+@i debug

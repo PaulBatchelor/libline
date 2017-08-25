@@ -1,8 +1,8 @@
 NAME=libline
 
-default: $(NAME).pdf $(NAME).a
+default: $(NAME).pdf $(NAME).a debug
 
-WEBFILES=$(NAME).w header.w point.w line.w mem.w
+WEBFILES=$(NAME).w header.w point.w line.w mem.w debug.w
 
 CFLAGS = -Wall -ansi
 
@@ -12,8 +12,8 @@ CFLAGS = -Wall -ansi
 $(NAME).a: $(NAME).o
 	$(AR) rcs $@ $(NAME).o
 
-#debug: $(NAME).c
-#	$(CC) $(CFLAGS) $< -DBUILD_MAIN -o $@
+debug: $(NAME).o 
+	$(CC) $(CFLAGS) debug.c -o $@ $(NAME).o
 
 $(NAME).pdf: $(WEBFILES)
 	cweave -x $(NAME).w
@@ -35,3 +35,4 @@ clean:
 	rm -rf $(NAME).a
 	rm -rf debug
 	rm -rf line.h
+	rm -rf debug.c
