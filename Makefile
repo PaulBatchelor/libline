@@ -18,7 +18,7 @@ debug: debug.c $(NAME).o
 	$(CC) $(CFLAGS) debug.c -o $@ $(NAME).o $(LDFLAGS)
 
 $(NAME).pdf: $(WEBFILES)
-	cweave -x $(NAME).w
+	cweave $(NAME).w
 	tex "\let\pdf+ \input $(NAME)"
 	dvipdfm $(NAME).dvi
 

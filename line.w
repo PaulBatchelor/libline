@@ -143,45 +143,64 @@ void ll_line_free(ll_line *ln)
     }
 }
 
-@ This is the top-level function called inside the audio callback. It computes
-the line. This is done through both ticking down a timer and walking
+@ |ll_line_step| is the top-level function called inside the audio callback. It computes
+the line. This is done through both ticking down the timer and walking
 through the linked list. 
-
-First, there is a check to see if the counter has ticked to zero. 
-If it has, the line goes to the next point in the next list. 
-
-If there are no points left in the list, the line has ended, and the output 
-value is the "A" value of the point.
-
-If the line is not at the end, then it will step to the next point in the 
-linked list. The timer is then reset, and the current position is incremented.
 
 @<The Line@> += 
 ll_flt ll_line_step(ll_line *ln)
 {
-    /* TODO: implement the rest of me please */
     UINT dur;
     UINT pos;
+@ If the line has ended, the step value is simply the "A" value of the 
+point. The function returns early with this value. If the line has not ended, 
+the routine moves forward. 
 
+@<The Line@> += 
     if(ln->end) {
         return ll_point_A(ln->last);    
     }
 
+@ There is a check to see if the counter has ticked to zero.
+
+
+@<The Line@> += 
     if(ln->counter == 0) {
-        if(ln->curpos < ln->size) {
+
+@ If the counter is zero, there is a check to see if there are any points left 
+in the list.  This is done by comparing the current point position with the size 
+of the of the list. Note that since the current point position is zero indexed, 
+the size is subtracted by 1.
+
+@<The Line@> += 
+        if(ln->curpos < (ln->size - 1)) {
+
+@ If the line is not at the end, then it will step to the next point in the 
+linked list. The duration in samples is computed, the counter is reset, and
+the position is incremented by one.
+@<The Line@> += 
             ln->last = ll_point_get_next_point(ln->last);
             ln->idur = ll_point_get_dur(ln->last) * ln->sr;
             ln->counter = ln->idur;
             ln->curpos++;
+@ If there are no points left in the list, the line has ended, and the |end|
+variable is turned on. This concludes both nested conditionals.
+@<The Line@> += 
         } else {
             ln->end = 1;
         }
     }
 
+@ The step function inside the point is called. The current point 
+position is a value derived from the counter. Since the counter moves backwards, 
+it is subtracted for the total line duration. The counter is then 
+decremented right before the point step function is called.
+
+@<The Line@> += 
     dur = ln->idur;
     pos = dur - ln->counter;
     ln->counter--;
-    return ll_point_step(ln->last, pos, dur);;
+    return ll_point_step(ln->last, pos, dur); @/
 }
 
 @ Sometimes it is can be useful to print points in a line. |ll_line_print|  
