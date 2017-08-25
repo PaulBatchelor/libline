@@ -107,6 +107,12 @@ ll_point * ll_point_get_next_point(ll_point *pt);
 @<Header Data@>+=
 ll_flt ll_point_step(ll_point *pt, UINT pos, UINT dur);
 
+@ These functions are needed to set up the step functions in point.
+@<Header Data@>+=
+void ll_point_data(ll_point *pt, void *data);
+void ll_point_cb_step(ll_point *pt, ll_cb_step stp);
+void ll_point_cb_destroy(ll_point *pt, ll_cb_free destroy);
+
 @ A point, once it is set, can be tacked on to the end of a line. The value 
 of this point becomes the end value of the previous point. 
 @<Header Data@>+=
@@ -151,3 +157,7 @@ ll_flt ll_line_step(ll_line *ln);
 @ This function will print all the points in a given line.
 @<Header Data@>+=
 void ll_line_print(ll_line *ln);
+
+@ This function sets a point to be a linear point.
+@<Header Data@>+=
+void ll_linpoint(ll_point *pt);

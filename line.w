@@ -137,6 +137,7 @@ void ll_line_free(ll_line *ln)
     pt = ln->root;
     for(i = 0; i < ln->size; i++) {
         next = ll_point_get_next_point(pt);
+        ll_point_destroy(pt);
         ln->free(ln->ud, pt);
         pt = next;
     }
@@ -182,10 +183,6 @@ ll_flt ll_line_step(ll_line *ln)
     ln->counter--;
     return ll_point_step(ln->last, pos, dur);;
 }
-
-@ The functions described below are the default malloc and free functions
-used internally by the line function. They are wrappers around the default
-C libraries. 
 
 @ Sometimes it is can be useful to print points in a line. |ll_line_print|  
 does just that, walking through the list and printing the values.

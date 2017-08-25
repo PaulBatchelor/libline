@@ -145,6 +145,25 @@ static ll_flt step(ll_point *pt, void *ud, UINT pos, UINT dur)
     return ll_point_A(pt);
 }
 
+@ These functions set the internal variables for the step function, step
+function data, and the destroy function, respectively.
+
+@<Default Step Function@>=
+void ll_point_data(ll_point *pt, void *data)
+{
+    pt->data = data;
+}
+
+void ll_point_cb_step(ll_point *pt, ll_cb_step stp)
+{
+   pt->step = stp;
+}
+
+void ll_point_cb_destroy(ll_point *pt, ll_cb_free destroy)
+{
+    pt->destroy = destroy;
+}
+
 @ These functions return the A and B values in the point struct, and 
 are particularly useful for interpolation functions.
 @<The Point@>+=

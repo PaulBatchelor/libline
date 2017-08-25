@@ -25,6 +25,7 @@ int main(int argc, char *argv[])
     sp_data *sp;
     user_data ud;
     ll_line *line;
+    ll_point *pt;
     sp_create(&sp);
     sp->sr = 44100;
 
@@ -36,7 +37,8 @@ int main(int argc, char *argv[])
     ud.line = malloc(ll_line_size());
     line = ud.line;
     ll_line_init(line, sp->sr);
-    ll_line_append(line, 440.0, 2.0);
+    pt = ll_line_append(line, 440.0, 2.0);
+    ll_linpoint(pt);
     ll_line_append(line, 880.0, 4.0);
     ll_line_done(line);
     ll_line_print(line);
