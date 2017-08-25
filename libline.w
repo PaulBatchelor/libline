@@ -13,9 +13,9 @@ library, it is favorable to turn on presence of the main function only when
 it is used for debugging purposes. 
 @c 
 #include <stdlib.h>
-#ifdef BUILD_MAIN
 #include <stdio.h>
 #include "line.h"
+#ifdef BUILD_MAIN
 int main()
 {
     ll_line *line;
