@@ -39,11 +39,10 @@ int main(int argc, char *argv[])
     ll_line_init(line, sp->sr);
     pt = ll_line_append(line, 440.0, 1.0);
     ll_linpoint(pt);
-    ll_line_append(line, 880.0, 0.5);
-    /*
+    pt = ll_line_append(line, 880.0, 0.5);
+    ll_linpoint(pt);
     pt = ll_line_append(line, 300.0, 0.9);
     ll_linpoint(pt);
-    */
 
     ll_line_done(line);
     ll_line_print(line);
