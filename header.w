@@ -8,6 +8,9 @@ programs.
 @<Header Data@>@/
 #endif
 
+@* Type Declarations. The following section describes the type declarations
+used in libline.
+
 @ Line values use floating point precision. This precision is set using the 
 macro definition |ll_flt| rather than a type declaration. By default, it is a 
 floating point value. However, this value can be overridden at compile time. 
@@ -46,6 +49,7 @@ point.
 @<Header Data@>+=
 typedef ll_flt (* ll_cb_step)(ll_point *pt, void *ud, UINT pos, UINT dur);
 
+@* Memory Functions.
 @ Default memory functions are implemented for line. They are simply wrappers
 for |malloc| and |free|.
 @<Header Data@>+=
@@ -61,7 +65,7 @@ void *ll_point_malloc(ll_point *pt, size_t size);
 void ll_point_free(ll_point *pt, void *ptr);
 void ll_point_destroy(ll_point *pt);
 
-
+@* Size and Initialization.
 @ Compilers are unable to tell what size opaque pointers are, so functions
 need to be written which return the size. This also shifts the burden of 
 allocation onto the user. 
@@ -76,6 +80,7 @@ this, things can be done to the structs.
 void ll_point_init(ll_point *pt);
 void ll_line_init(ll_line *ln, int sr);
 
+@* Point Declarations.
 @ Points have two fundamental properties: a value, and a duration for that 
 value. 
 @<Header Data@>+=
@@ -122,6 +127,8 @@ void ll_point_cb_destroy(ll_point *pt, ll_cb_free destroy);
 
 @<Header Data@>+=
 void ll_point_mem_callback(ll_point *pt, ll_cb_malloc m, ll_cb_free f);
+
+@* Line Function Declarations.
 
 @ A point, once it is set, can be tacked on to the end of a line. The value 
 of this point becomes the end value of the previous point. 
@@ -172,6 +179,7 @@ void ll_line_print(ll_line *ln);
 @<Header Data@>+=
 void ll_linpoint(ll_point *pt);
 
+@* Lines Function Declarations.
 @ These are the functions used for |ll_lines|. More words for this will be
 added later if needed.
 @<Header Data@>+=
