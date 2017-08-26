@@ -171,3 +171,13 @@ void ll_line_print(ll_line *ln);
 @ This function sets a point to be a linear point.
 @<Header Data@>+=
 void ll_linpoint(ll_point *pt);
+
+@ These are the functions used for |ll_lines|. More words for this will be
+added later if needed.
+@<Header Data@>+=
+size_t ll_lines_size();
+void ll_lines_init(ll_lines *l);
+void ll_lines_mem_callback(ll_lines *l, ll_cb_malloc m, ll_cb_free f);
+void ll_lines_append(ll_lines *l, ll_line **line, ll_flt **val);
+void ll_lines_step(ll_lines *l);
+void ll_lines_free(ll_lines *l);
