@@ -621,8 +621,8 @@ void ll_free_nothing(void*ud,void*ptr)
 /*117:*/
 #line 15 "./sporth.w"
 
-/*118:*/
-#line 24 "./sporth.w"
+/*119:*/
+#line 40 "./sporth.w"
 
 static int sporth_ll(plumber_data*pd,sporth_stack*stack,void**ud)
 {
@@ -631,8 +631,7 @@ l= *ud;
 if(pd->mode==PLUMBER_COMPUTE)ll_lines_step(l);
 return PLUMBER_OK;
 }
-
-/*:118*/
+/*:119*/
 #line 16 "./sporth.w"
 
 void ll_sporth_ugen(ll_lines*l,plumber_data*pd,const char*ugen)
@@ -640,8 +639,8 @@ void ll_sporth_ugen(ll_lines*l,plumber_data*pd,const char*ugen)
 plumber_ftmap_add_function(pd,ugen,sporth_ll,l);
 }
 
-/*:117*//*119:*/
-#line 35 "./sporth.w"
+/*:117*//*118:*/
+#line 24 "./sporth.w"
 
 ll_line*ll_sporth_line(ll_lines*l,plumber_data*pd,const char*name)
 {
@@ -654,7 +653,9 @@ plumber_ftmap_delete(pd,0);
 plumber_ftmap_add_userdata(pd,name,val);
 plumber_ftmap_delete(pd,1);
 return ln;
-}/*:119*/
+}
+
+/*:118*/
 #line 6 "./sporth.w"
 
 #endif
