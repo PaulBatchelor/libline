@@ -1,4 +1,4 @@
-@* The Point. The point is the atomic value used inside of libline. 
+@** The Point. The point is the atomic value used inside of libline. 
 
 @<Top@>+= @<The Point@>
 

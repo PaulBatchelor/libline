@@ -1,4 +1,4 @@
-@* The Lines. When more than one line is required, you need {\it lines}. 
+@** The Lines. When more than one line is required, you need {\it lines}. 
 |ll_lines| is the next abstraction up from |ll_line|. 
 
 @<Top@>+= @<Lines@>

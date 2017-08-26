@@ -1,4 +1,4 @@
-@* The Line. A line is a sequence of points in time. A line smoothly steps
+@** The Line. A line is a sequence of points in time. A line smoothly steps
 through the points with some sort of interpolation.
 
 @<Top@> += @<The Line@>

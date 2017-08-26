@@ -1,4 +1,4 @@
-@* Linear Points. Linear points create a straight line from point A to point B. 
+@** Linear Points. Linear points create a straight line from point A to point B. 
 
 @<Top@> += 
 @<Linear Point@>

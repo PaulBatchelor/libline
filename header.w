@@ -1,4 +1,4 @@
-@* The Header File. This library has a single header file, containing all
+@** The Header File. This library has a single header file, containing all
 the necessary struct and function definitions for the API. This file should be
 installed alongside the generated library file in order to be used with other
 programs.
