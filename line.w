@@ -207,7 +207,7 @@ decremented right before the point step function is called.
     return ll_point_step(ln->last, pos, dur); @/
 }
 
-@ Sometimes it is can be useful to print points in a line. |ll_line_print|  
+@ Sometimes it can be useful to print points in a line. |ll_line_print|  
 does just that, walking through the list and printing the values.
 
 @<The Line@> += 

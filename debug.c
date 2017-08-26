@@ -26,6 +26,8 @@ int main(int argc, char *argv[])
     user_data ud;
     ll_line *line;
     ll_point *pt;
+    ll_lines *lines;
+
     sp_create(&sp);
     sp->sr = 44100;
 
@@ -33,6 +35,10 @@ int main(int argc, char *argv[])
     sp_gen_sine(sp, ud.ft);
     sp_osc_create(&ud.osc);
     sp_osc_init(sp, ud.osc, ud.ft, 0.f);
+
+    lines = malloc(ll_lines_size());
+    ll_lines_init(lines, sp->sr);
+    ll_lines_append(lines, NULL, NULL);
 
     ud.line = malloc(ll_line_size());
     line = ud.line;
@@ -51,6 +57,8 @@ int main(int argc, char *argv[])
 
     ll_line_free(line);
     free(line);
+    ll_lines_free(lines);
+    free(lines);
 
     sp_ftbl_destroy(&ud.ft);
     sp_osc_destroy(&ud.osc);

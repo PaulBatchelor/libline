@@ -176,8 +176,8 @@ void ll_linpoint(ll_point *pt);
 added later if needed.
 @<Header Data@>+=
 size_t ll_lines_size();
-void ll_lines_init(ll_lines *l);
-void ll_lines_mem_callback(ll_lines *l, ll_cb_malloc m, ll_cb_free f);
+void ll_lines_init(ll_lines *l, int sr);
+void ll_lines_mem_callback(ll_lines *l, void *ud, ll_cb_malloc m, ll_cb_free f);
 void ll_lines_append(ll_lines *l, ll_line **line, ll_flt **val);
 void ll_lines_step(ll_lines *l);
 void ll_lines_free(ll_lines *l);
