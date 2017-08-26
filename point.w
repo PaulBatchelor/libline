@@ -2,6 +2,7 @@
 
 @<Top@>+= @<The Point@>
 
+@* The |ll_point| struct declaration.
 @ A libline point can be best thought of as a line chunk going from
 point A to point B over a given duration in seconds.
 
@@ -40,6 +41,7 @@ this is set to return point A>
 
 @/};
 
+@* Point Initialization.
 @ The size of the point struct is implemented as a function.
 
 @<The Point@>+=
@@ -64,6 +66,9 @@ void ll_point_init(ll_point *pt)
     pt->destroy = ll_free_nothing;
     pt->step = step;
 }
+
+@* Point Setters and Getters. The following describes setter and getter
+functions needed for the |ll_point| opaque pointer type.
 
 @ Set the initial "A" value. 
 @<The Point@>+=
@@ -116,6 +121,21 @@ ll_flt * ll_point_get_value(ll_point *pt)
     return &pt->A;
 }
 
+@ These functions return the A and B values in the point struct, and 
+are particularly useful for interpolation functions.
+@<The Point@>+=
+ll_flt ll_point_A(ll_point *pt)
+{
+    return pt->A;
+}
+
+ll_flt ll_point_B(ll_point *pt)
+{
+    return *pt->B;
+}
+
+@* Point Memory Handling.
+
 @ Various interpolation styles will require the ability to allocate memory.
 For this reason, the memory allocation functions must be exposed. 
 
@@ -137,6 +157,8 @@ void ll_point_destroy(ll_point *pt)
     pt->destroy(pt, pt->data);
 }
 
+@* Point Step Function. Every point has a "step" function, which computes
+the current points value at that moment in time. 
 
 @ The default step function simply returns point A.
 @<Default Step Function@>=
@@ -164,18 +186,6 @@ void ll_point_cb_destroy(ll_point *pt, ll_cb_free destroy)
     pt->destroy = destroy;
 }
 
-@ These functions return the A and B values in the point struct, and 
-are particularly useful for interpolation functions.
-@<The Point@>+=
-ll_flt ll_point_A(ll_point *pt)
-{
-    return pt->A;
-}
-
-ll_flt ll_point_B(ll_point *pt)
-{
-    return *pt->B;
-}
 @ This calls the step function inside of the point.
 @<The Point@>+=
 ll_flt ll_point_step(ll_point *pt, UINT pos, UINT dur)
