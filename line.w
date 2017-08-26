@@ -3,6 +3,7 @@ through the points with some sort of interpolation.
 
 @<Top@> += @<The Line@>
 
+@* The |ll_line| Declaration.
 @ The line is mostly a linked list, with a root value, a pointer to the value
 last appended, and the size.
 
@@ -57,6 +58,7 @@ size_t ll_line_size(void)
 }
 
 
+@* Line Initalization.
 @ After the line is allocated, it must be initialized. A line starts out
 with zero points. Pointers are set to be |NULL| ({\tt NULL}). The 
 memory allocation functions are set to defaults.
@@ -76,6 +78,7 @@ void ll_line_init(ll_line *ln, int sr)
     ln->end = 0;
 }
 
+@* Appending a Point to a Line.
 @ Points are added to a line in chronological order because they are appended
 to the end of a linked list. 
 
@@ -128,6 +131,20 @@ ll_point * ll_line_append(ll_line *ln, ll_flt val, ll_flt dur)
     return pt;
 }
 
+@ Once points are doing being added to a line, it must be rewound and reset
+to the beginning.
+
+@<The Line@>+=
+void ll_line_done(ll_line *ln)
+{
+    ln->curpos = 0;
+    ln->last = ln->root;
+    ln->idur = ll_point_get_dur(ln->root) * ln->sr;
+    ln->counter = ln->idur;
+    ln->end = 0;
+}
+
+@* Freeing Line Memory. 
 @ All things that must be allocated internally must then be freed using 
 the function |ll_line_free|. This function essentially walks through the 
 linked list and frees all the points. 
@@ -147,7 +164,8 @@ void ll_line_free(ll_line *ln)
     }
 }
 
-@ |ll_line_step| is the top-level function called inside the audio callback. It computes
+@* Line Step Function.
+@ |ll_line_step| is the top-level function that computes
 the line. This is done through both ticking down the timer and walking
 through the linked list. 
 
@@ -207,6 +225,7 @@ decremented right before the point step function is called.
     return ll_point_step(ln->last, pos, dur); @/
 }
 
+@* Printing Line Data.
 @ Sometimes it can be useful to print points in a line. |ll_line_print|  
 does just that, walking through the list and printing the values.
 
@@ -231,17 +250,4 @@ void ll_line_print(ll_line *ln)
 
         pt = next;
     }
-}
-
-@ Once points are doing being added to a line, it must be rewound and reset
-to the beginning.
-
-@<The Line@>+=
-void ll_line_done(ll_line *ln)
-{
-    ln->curpos = 0;
-    ln->last = ln->root;
-    ln->idur = ll_point_get_dur(ln->root) * ln->sr;
-    ln->counter = ln->idur;
-    ln->end = 0;
 }
