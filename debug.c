@@ -25,7 +25,19 @@ static void process(sp_data *sp, void *udata)
     sp_out(sp, 0, s_osc);
 }
 
-int main(int argc, char *argv[])
+static void process_sporth(sp_data *sp, void *ud)
+{
+    plumber_data *pd;
+
+    pd = ud;
+
+    plumber_compute(pd, PLUMBER_COMPUTE);
+
+    sp_out(sp, 0, sporth_stack_pop_float(&pd->sporth.stack));
+
+}
+
+int test_1(int argc, char **argv[])
 {
     sp_data *sp;
     user_data ud;
@@ -73,4 +85,68 @@ int main(int argc, char *argv[])
     sp_fosc_destroy(&ud.fm);
     sp_destroy(&sp);
     return 0;
+}
+
+int test_sporth(int argc , char *argv[])
+{
+    sp_data *sp;
+    ll_line *line;
+    ll_lines *lines;
+    ll_point *pt;
+    plumber_data pd;
+
+    sp_create(&sp);
+    sp->sr = 44100;
+    pd.sp = sp;
+
+    lines = malloc(ll_lines_size());
+    ll_lines_init(lines, sp->sr);
+
+
+    /* register plumber */
+
+    plumber_register(&pd);
+    plumber_init(&pd);
+    ll_sporth_ugen(lines, &pd, "ll");
+
+
+    /* ll_lines_append(lines, &line, NULL); */
+    
+    line = ll_sporth_line(lines, &pd, "freq");
+
+    pt = ll_line_append(line, 440.0, 1.0);
+    ll_linpoint(pt);
+    pt = ll_line_append(line, 880.0, 0.5);
+    ll_linpoint(pt);
+    pt = ll_line_append(line, 300.0, 0.9);
+    ll_linpoint(pt);
+
+    ll_line_done(line);
+
+    line = ll_sporth_line(lines, &pd, "index");
+    pt = ll_line_append(line, 0, 3.0);
+    ll_linpoint(pt);
+    pt = ll_line_append(line, 6.7, 1.0);
+    ll_linpoint(pt);
+    ll_line_done(line);
+
+
+    /* parse sporth string */
+    plumber_parse_string(&pd, "_ll fe _freq get 0.3 1 1 _index get fm ");
+    plumber_compute(&pd, PLUMBER_INIT);
+
+    sp_process(sp, &pd, process_sporth);
+
+    ll_lines_free(lines);
+    free(lines);
+    
+
+    plumber_clean(&pd);
+    sp_destroy(&sp);
+    return 0;
+}
+
+int main(int argc, char *argv[])
+{
+    return test_sporth(argc, argv);
 }

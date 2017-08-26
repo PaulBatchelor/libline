@@ -5,6 +5,10 @@ programs.
 @(line.h@>=
 #ifndef LINE_H
 #define LINE_H
+#ifdef LL_SPORTH
+#include <soundpipe.h>
+#include <sporth.h>
+#endif
 @<Header Data@>@/
 #endif
 
@@ -189,3 +193,12 @@ void ll_lines_mem_callback(ll_lines *l, void *ud, ll_cb_malloc m, ll_cb_free f);
 void ll_lines_append(ll_lines *l, ll_line **line, ll_flt **val);
 void ll_lines_step(ll_lines *l);
 void ll_lines_free(ll_lines *l);
+
+@* Sporth Function Declarations. An optional feature of libline is to have
+hooks into the Sporth programming language.
+
+@<Header Data@>+=
+#ifdef LL_SPORTH
+void ll_sporth_ugen(ll_lines *l, plumber_data *pd, const char *ugen);
+ll_line * ll_sporth_line(ll_lines *l, plumber_data *pd, const char *name);
+#endif

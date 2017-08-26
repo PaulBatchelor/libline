@@ -2,11 +2,11 @@ NAME=libline
 
 default: $(NAME).pdf $(NAME).a debug
 
-WEBFILES=$(NAME).w header.w point.w line.w mem.w linpoint.w lines.w
+WEBFILES=$(NAME).w header.w point.w line.w mem.w linpoint.w lines.w sporth.w
 
-LDFLAGS=-lsoundpipe -lsndfile -lm
+LDFLAGS=-lsporth -lsoundpipe -lsndfile -lm -ldl
 
-CFLAGS = -Wall -ansi -g
+CFLAGS = -Wall -ansi -g -DLL_SPORTH
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
