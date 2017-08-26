@@ -113,6 +113,11 @@ void ll_point_data(ll_point *pt, void *data);
 void ll_point_cb_step(ll_point *pt, ll_cb_step stp);
 void ll_point_cb_destroy(ll_point *pt, ll_cb_free destroy);
 
+@ This function sets custom memory allocation functions for the point. 
+
+@<Header Data@>+=
+void ll_point_mem_callback(ll_point *pt, ll_cb_malloc m, ll_cb_free f);
+
 @ A point, once it is set, can be tacked on to the end of a line. The value 
 of this point becomes the end value of the previous point. 
 @<Header Data@>+=

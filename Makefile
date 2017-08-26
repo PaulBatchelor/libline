@@ -35,5 +35,6 @@ clean:
 	rm -rf $(NAME).toc
 	rm -rf $(NAME).tex
 	rm -rf $(NAME).a
+	rm -rf $(NAME).o
 	rm -rf debug
 	rm -rf line.h

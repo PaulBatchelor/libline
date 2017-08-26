@@ -108,6 +108,9 @@ track of. The function |ll_line_append| wraps around
 |ll_line_append_point| and uses the internal memory functions to allocate
 memory.
 
+When the point is initialized, the memory functions used in the line are
+forwarded to the point callback via |ll_point_mem_callback|. 
+
 @<The Line@> += 
 ll_point * ll_line_append(ll_line *ln, ll_flt val, ll_flt dur)
 {
@@ -118,6 +121,7 @@ ll_point * ll_line_append(ll_line *ln, ll_flt val, ll_flt dur)
     ll_point_init(pt);
     ll_point_value(pt, val);
     ll_point_dur(pt, dur);
+    ll_point_mem_callback(pt, ln->malloc, ln->free);
 
     ll_line_append_point(ln, pt);
 

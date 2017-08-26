@@ -182,3 +182,13 @@ ll_flt ll_point_step(ll_point *pt, UINT pos, UINT dur)
 {
     return pt->step(pt, pt->data, pos, dur);
 }
+
+@ The function |ll_point_mem_callback| sets the memory allocation callbacks.
+This function may be called implicitely when setting memory allocation functions
+from higher abstractions.
+@<The Point@>+=
+void ll_point_mem_callback(ll_point *pt, ll_cb_malloc m, ll_cb_free f)
+{
+    pt->malloc = m;
+    pt->free = f;
+}
