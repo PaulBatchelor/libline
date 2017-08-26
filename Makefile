@@ -1,12 +1,21 @@
 NAME=libline
 
-default: $(NAME).pdf $(NAME).a debug
+DEFAULT = $(NAME).a debug
 
 WEBFILES=$(NAME).w header.w point.w line.w mem.w linpoint.w lines.w sporth.w
 
 LDFLAGS=-lsporth -lsoundpipe -lsndfile -lm -ldl
 
 CFLAGS = -Wall -ansi -g -DLL_SPORTH
+
+ifdef USE_CWEB
+CTANGLE = ctangle
+DEFAULT += $(NAME).pdf
+else
+CTANGLE = echo ctangle
+endif
+
+default: $(DEFAULT) 
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -23,11 +32,10 @@ $(NAME).pdf: $(WEBFILES)
 	dvipdfm $(NAME).dvi
 
 $(NAME).c: $(WEBFILES)
-	ctangle $(NAME).w
+	$(CTANGLE) $(NAME).w
 
 clean:
 	rm -rf $(NAME).pdf
-	rm -rf $(NAME).c
 	rm -rf $(NAME).scn
 	rm -rf $(NAME).idx
 	rm -rf $(NAME).log
@@ -37,4 +45,3 @@ clean:
 	rm -rf $(NAME).a
 	rm -rf $(NAME).o
 	rm -rf debug
-	rm -rf line.h
