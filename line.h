@@ -173,14 +173,21 @@ void ll_lines_step(ll_lines*l);
 void ll_lines_free(ll_lines*l);
 
 /*:36*//*37:*/
-#line 200 "./header.w"
+#line 199 "./header.w"
+
+void ll_add_linpoint(ll_lines*l,ll_flt val,ll_flt dur);
+void ll_end(ll_lines*l);
+
+/*:37*//*38:*/
+#line 206 "./header.w"
 
 #ifdef LL_SPORTH
 void ll_sporth_ugen(ll_lines*l,plumber_data*pd,const char*ugen);
 ll_line*ll_sporth_line(ll_lines*l,plumber_data*pd,const char*name);
 #endif
+
 #line 1 "./point.w"
-/*:37*/
+/*:38*/
 #line 12 "./header.w"
 
 #endif

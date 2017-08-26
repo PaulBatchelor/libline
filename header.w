@@ -168,7 +168,7 @@ in time.
 void ll_line_done(ll_line *ln);
 
 
-@ The top-level function used is the step function. This function gets every
+@ This function gets every
 sample inside of the audio loop, generating a single sample and moving forward
 in time by a single sample.
 @<Header Data@>+=
@@ -194,6 +194,12 @@ void ll_lines_append(ll_lines *l, ll_line **line, ll_flt **val);
 void ll_lines_step(ll_lines *l);
 void ll_lines_free(ll_lines *l);
 
+@* High-level Interface Declarations. These functions provide a convenient
+interface for constructing lines.
+@<Header Data@>+=
+void ll_add_linpoint(ll_lines *l, ll_flt val, ll_flt dur);
+void ll_end(ll_lines *l);
+
 @* Sporth Function Declarations. An optional feature of libline is to have
 hooks into the Sporth programming language.
 
@@ -202,3 +208,4 @@ hooks into the Sporth programming language.
 void ll_sporth_ugen(ll_lines *l, plumber_data *pd, const char *ugen);
 ll_line * ll_sporth_line(ll_lines *l, plumber_data *pd, const char *name);
 #endif
+

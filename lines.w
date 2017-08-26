@@ -25,6 +25,8 @@ struct ll_lines {
     ll_cb_malloc malloc;
     ll_cb_free free;
     void *ud;
+    ll_line *line;
+    ll_point *pt;
 };
 
 @* Lines Initialization.
@@ -108,6 +110,7 @@ void ll_lines_append(ll_lines *l, ll_line **line, ll_flt **val)
 
     l->size++;
     l->last = entry;
+    l->line = entry->ln;
 }
 
 @* Lines Step Function.
@@ -128,3 +131,19 @@ void ll_lines_step(ll_lines *l)
     }
 }
 
+@* Wrappers for adding points. The Line API provides a set of high-level
+functions for populating lines with points. These use functions abstract away
+some of the C structs needed, making it easier to export to higher-level
+languages like Lua. 
+@<Lines@>+=
+void ll_add_linpoint(ll_lines *l, ll_flt val, ll_flt dur)
+{
+    ll_point *pt;
+    pt = ll_line_append(l->line, val, dur);
+    ll_linpoint(pt);
+}
+
+void ll_end(ll_lines *l)
+{
+    ll_line_done(l->line);
+}
