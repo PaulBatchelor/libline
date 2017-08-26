@@ -28,6 +28,11 @@ specified behavior. This collection of points forms a line.
 @<Header Data@>+=
 typedef struct ll_line ll_line;
 
+@ A collection of lines is grouped in an interface known |ll_lines|.
+@<Header Data@>+=
+typedef struct ll_lines ll_lines;
+
+
 @ Memory allocation functions are needed in some situations. By default, these
 are just wrappers around malloc free. However, this is designed so that
 they be overridden use custom memory handling functions.

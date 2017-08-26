@@ -2,7 +2,7 @@ NAME=libline
 
 default: $(NAME).pdf $(NAME).a debug
 
-WEBFILES=$(NAME).w header.w point.w line.w mem.w  linpoint.w
+WEBFILES=$(NAME).w header.w point.w line.w mem.w linpoint.w lines.w
 
 LDFLAGS=-lsoundpipe -lsndfile -lm
 

@@ -20,5 +20,6 @@ it is used for debugging purposes.
 @i header
 @i point
 @i line
-@i mem
+@i lines
 @i linpoint
+@i mem
