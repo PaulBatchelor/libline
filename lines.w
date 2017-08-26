@@ -3,6 +3,8 @@
 
 @<Top@>+= @<Lines@>
 
+@* The |ll_lines| Declaration.
+
 @ The |ll_line_entry| data struct wraps |ll_line| into a linked list entry.
 
 @<Lines@>+=
@@ -24,6 +26,8 @@ struct ll_lines {
     ll_cb_free free;
     void *ud;
 };
+
+@* Lines Initialization.
 
 @ |ll_lines_size| returns the size of the ll\_lines data struct.
 
@@ -47,6 +51,7 @@ void ll_lines_init(ll_lines *l, int sr)
     l->sr = sr;
 }
 
+@* Lines Memory Handling.
 @ Alternative memory allocation functions can be set for |ll_lines| via
 |ll_lines_mem_callback|.
 
@@ -58,6 +63,26 @@ void ll_lines_mem_callback(ll_lines *l, void *ud, ll_cb_malloc m, ll_cb_free f)
     l->ud = ud;
 }
 
+@ Write some words here.
+@<Lines@>+=
+void ll_lines_free(ll_lines *l)
+{
+    unsigned int i;
+    ll_line_entry *entry;
+    ll_line_entry *next;
+
+    entry = l->root;
+
+    for(i = 0; i < l->size; i++) {
+        next = entry->next;
+        ll_line_free(entry->ln);
+        l->free(l->ud, entry->ln);
+        l->free(l->ud, entry);
+        entry = next;
+    }
+}
+
+@* Appending a Line to Lines.
 @ This creates and appends a new |ll_line| to the |ll_lines| linked list.
 The address of this new |ll_line| is saved to the variable |line|. The output
 memory address of the |ll_line| is saved to the variable |val|. 
@@ -85,6 +110,7 @@ void ll_lines_append(ll_lines *l, ll_line **line, ll_flt **val)
     l->last = entry;
 }
 
+@* Lines Step Function.
 @ The step function for |ll_lines| will walk through the linked list and call
 the step function for each |ll_line| inside each |ll_line_entry|. 
 
@@ -102,21 +128,3 @@ void ll_lines_step(ll_lines *l)
     }
 }
 
-@ Write some words here.
-@<Lines@>+=
-void ll_lines_free(ll_lines *l)
-{
-    unsigned int i;
-    ll_line_entry *entry;
-    ll_line_entry *next;
-
-    entry = l->root;
-
-    for(i = 0; i < l->size; i++) {
-        next = entry->next;
-        ll_line_free(entry->ln);
-        l->free(l->ud, entry->ln);
-        l->free(l->ud, entry);
-        entry = next;
-    }
-}
