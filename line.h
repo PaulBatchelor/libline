@@ -162,8 +162,13 @@ void ll_line_print(ll_line*ln);
 
 void ll_linpoint(ll_point*pt);
 
-/*:34*//*36:*/
-#line 189 "./header.w"
+/*:34*//*35:*/
+#line 187 "./header.w"
+
+void ll_exppoint(ll_point*pt,ll_flt curve);
+
+/*:35*//*37:*/
+#line 193 "./header.w"
 
 size_t ll_lines_size();
 void ll_lines_init(ll_lines*l,int sr);
@@ -172,14 +177,15 @@ void ll_lines_append(ll_lines*l,ll_line**line,ll_flt**val);
 void ll_lines_step(ll_lines*l);
 void ll_lines_free(ll_lines*l);
 
-/*:36*//*37:*/
-#line 199 "./header.w"
+/*:37*//*38:*/
+#line 203 "./header.w"
 
 void ll_add_linpoint(ll_lines*l,ll_flt val,ll_flt dur);
+void ll_add_exppoint(ll_lines*l,ll_flt val,ll_flt dur,ll_flt curve);
 void ll_end(ll_lines*l);
 
-/*:37*//*38:*/
-#line 206 "./header.w"
+/*:38*//*39:*/
+#line 211 "./header.w"
 
 #ifdef LL_SPORTH
 void ll_sporth_ugen(ll_lines*l,plumber_data*pd,const char*ugen);
@@ -187,7 +193,7 @@ ll_line*ll_sporth_line(ll_lines*l,plumber_data*pd,const char*name);
 #endif
 
 #line 1 "./point.w"
-/*:38*/
+/*:39*/
 #line 12 "./header.w"
 
 #endif

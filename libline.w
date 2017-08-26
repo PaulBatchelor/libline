@@ -10,6 +10,7 @@ facility does not exist.
 @c 
 #include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 #include "line.h"@/
 @<Top@>@/
 
@@ -18,5 +19,6 @@ facility does not exist.
 @i line
 @i lines
 @i linpoint
+@i exppoint
 @i mem
 @i sporth

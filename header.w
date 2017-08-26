@@ -183,6 +183,10 @@ void ll_line_print(ll_line *ln);
 @<Header Data@>+=
 void ll_linpoint(ll_point *pt);
 
+@ Sets a point to be an exponential point.
+@<Header Data@>+=
+void ll_exppoint(ll_point *pt, ll_flt curve);
+
 @* Lines Function Declarations.
 @ These are the functions used for |ll_lines|. More words for this will be
 added later if needed.
@@ -198,6 +202,7 @@ void ll_lines_free(ll_lines *l);
 interface for constructing lines.
 @<Header Data@>+=
 void ll_add_linpoint(ll_lines *l, ll_flt val, ll_flt dur);
+void ll_add_exppoint(ll_lines *l, ll_flt val, ll_flt dur, ll_flt curve);
 void ll_end(ll_lines *l);
 
 @* Sporth Function Declarations. An optional feature of libline is to have

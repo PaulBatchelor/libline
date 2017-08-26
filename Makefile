@@ -2,7 +2,15 @@ NAME=libline
 
 DEFAULT = $(NAME).a debug
 
-WEBFILES=$(NAME).w header.w point.w line.w mem.w linpoint.w lines.w sporth.w
+WEBFILES=$(NAME).w\
+		 header.w\
+		 point.w\
+		 line.w\
+		 mem.w\
+		 linpoint.w\
+		 lines.w\
+		 sporth.w\
+		 exppoint.w\
 
 LDFLAGS=-lsporth -lsoundpipe -lsndfile -lm -ldl
 

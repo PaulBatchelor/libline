@@ -3,7 +3,6 @@
 @<Top@> += 
 @<Linear Point@>
 
-@* Linear Point Data.
 @ The main data structure for a linear point contains an incrementor value 
 |inc| and an accumulator value |acc|. 
 
@@ -13,7 +12,6 @@ typedef struct {
     ll_flt acc;
 } linpoint;
 
-@* Linear Point Setup.
 @ The setup function for linpoint allocates the memory needed for the 
 |linpoint| struct, then binds it and the step callback to the point.
 
@@ -28,7 +26,6 @@ void ll_linpoint(ll_point *pt)
     ll_point_cb_destroy(pt, ll_linpoint_destroy);
 }
 
-@* The Linear Step Function.
 @ The linear step function is reasonably straightforward. When the line 
 position is zero, the incrementor and acculumaltor values are implemented. 
 Next, the current value of the acculumator is returned and then incremented.
@@ -52,7 +49,6 @@ static ll_flt linpoint_step(ll_point *pt, void *ud, UINT pos, UINT dur)
     return val;
 }
 
-@* Freeing Linear Point Memory.
 @ The destroy function for linpoint destroys the memory previously allocated.
 @<Private Functions for Lin...@>+=
 static void ll_linpoint_destroy(void *ud, void *ptr)

@@ -108,9 +108,9 @@ int test_sporth(int argc , char *argv[])
     ll_sporth_ugen(lines, &pd, "ll");
 
     ll_sporth_line(lines, &pd, "freq");
-    ll_add_linpoint(lines, 440, 1.0);
-    ll_add_linpoint(lines, 880, 0.5);
-    ll_add_linpoint(lines, 300.0, 0.9);
+    ll_add_exppoint(lines, 0.001, 2.0, 4.0);
+    ll_add_linpoint(lines, 1, 0.5);
+    ll_add_linpoint(lines, 0.5, 0.9);
     ll_end(lines);
 
     ll_sporth_line(lines, &pd, "index");
@@ -121,7 +121,9 @@ int test_sporth(int argc , char *argv[])
 
     /* parse sporth string */
 
-    plumber_parse_string(&pd, "_ll fe _freq get 0.3 1 1 _index get fm ");
+    plumber_parse_string(&pd, 
+        "_ll fe _freq get 300 880 scale 0.3 1 1 _index get fm "
+        );
     plumber_compute(&pd, PLUMBER_INIT);
 
     sp_process(sp, &pd, process_sporth);
