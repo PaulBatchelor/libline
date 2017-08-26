@@ -7,10 +7,6 @@ thought of as a high-level gesture for computer music. Libline will be designed
 to pair well with sound tools like Soundpipe and Sporth, where such a gesture
 facility does not exist. 
 
-Things have to start somewhere, so here is program that says hello. The
-|BUILD_MAIN| macro is set via a compiler flag. As this is intended to be a
-library, it is favorable to turn on presence of the main function only when
-it is used for debugging purposes. 
 @c 
 #include <stdlib.h>
 #include <stdio.h>
