@@ -6,7 +6,9 @@
 typedef struct {
     sp_ftbl *ft;
     sp_osc *osc;
-    ll_line *line;
+    ll_line *l;
+    ll_lines *lines;
+    ll_flt *val;
 } user_data;
 
 static void process(sp_data *sp, void *udata)
@@ -15,7 +17,8 @@ static void process(sp_data *sp, void *udata)
     user_data *ud;
     ud = udata;
 
-    ud->osc->freq = ll_line_step(ud->line);
+    ll_lines_step(ud->lines);
+    ud->osc->freq = *ud->val;
     sp_osc_compute(sp, ud->osc, NULL, &s_osc);
     sp_out(sp, 0, s_osc);
 }
@@ -25,8 +28,8 @@ int main(int argc, char *argv[])
     sp_data *sp;
     user_data ud;
     ll_line *line;
-    ll_point *pt;
     ll_lines *lines;
+    ll_point *pt;
 
     sp_create(&sp);
     sp->sr = 44100;
@@ -36,13 +39,12 @@ int main(int argc, char *argv[])
     sp_osc_create(&ud.osc);
     sp_osc_init(sp, ud.osc, ud.ft, 0.f);
 
-    lines = malloc(ll_lines_size());
-    ll_lines_init(lines, sp->sr);
-    ll_lines_append(lines, NULL, NULL);
+    ud.lines = malloc(ll_lines_size());
+    lines = ud.lines;
+    ll_lines_init(ud.lines, sp->sr);
+    ll_lines_append(lines, &ud.l, &ud.val);
 
-    ud.line = malloc(ll_line_size());
-    line = ud.line;
-    ll_line_init(line, sp->sr);
+    line = ud.l;
     pt = ll_line_append(line, 440.0, 1.0);
     ll_linpoint(pt);
     pt = ll_line_append(line, 880.0, 0.5);
@@ -55,8 +57,6 @@ int main(int argc, char *argv[])
 
     sp_process(sp, &ud, process);
 
-    ll_line_free(line);
-    free(line);
     ll_lines_free(lines);
     free(lines);
 

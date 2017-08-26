@@ -67,7 +67,7 @@ void ll_lines_append(ll_lines *l, ll_line **line, ll_flt **val)
 {
     ll_line_entry *entry;
    
-    entry = l->malloc(l->ud, sizeof(ll_lines));
+    entry = l->malloc(l->ud, sizeof(ll_line_entry));
     entry->val = 0.f;
     entry->ln = l->malloc(l->ud, ll_line_size());
     ll_line_init(entry->ln, l->sr);
@@ -85,12 +85,21 @@ void ll_lines_append(ll_lines *l, ll_line **line, ll_flt **val)
     l->last = entry;
 }
 
-@ Write some words here.
+@ The step function for |ll_lines| will walk through the linked list and call
+the step function for each |ll_line| inside each |ll_line_entry|. 
 
 @<Lines@>+=
 void ll_lines_step(ll_lines *l)
 {
-    /* TODO: implement me */
+    unsigned int i;
+    ll_line_entry *entry;
+
+    entry = l->root;
+
+    for(i = 0; i < l->size; i++) {
+        entry->val = ll_line_step(entry->ln);
+        entry = entry->next;
+    }
 }
 
 @ Write some words here.
