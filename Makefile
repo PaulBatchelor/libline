@@ -15,7 +15,7 @@ WEBFILES=$(NAME).w\
 
 LDFLAGS=-lsporth -lsoundpipe -lsndfile -lm -ldl
 
-CFLAGS = -Wall -ansi -g -DLL_SPORTH
+CFLAGS = -Wall -ansi -g -DLL_SPORTH_STANDALONE -DLL_SPORTH
 
 ifdef USE_CWEB
 CTANGLE = ctangle

@@ -5,10 +5,11 @@ programs.
 @(line.h@>=
 #ifndef LINE_H
 #define LINE_H
-#ifdef LL_SPORTH
+#ifdef LL_SPORTH_STANDALONE
 #include <soundpipe.h>
 #include <sporth.h>
 #endif
+
 @<Header Data@>@/
 #endif
 

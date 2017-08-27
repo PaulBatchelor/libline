@@ -4,6 +4,9 @@
 #include <stdlib.h> 
 #include <stdio.h> 
 #include <math.h> 
+#ifdef LL_SPORTH_UGEN
+#include "plumber.h"
+#endif
 #include "line.h"
 /*41:*/
 #line 3 "./point.w"
@@ -558,7 +561,7 @@ ll_line_append(l->line,val,dur);
 void ll_add_tick(ll_lines*l,ll_flt dur)
 {
 ll_point*pt;
-pt= ll_line_append(l->line,1.0,dur);
+pt= ll_line_append(l->line,0.0,dur);
 ll_tick(pt);
 }
 
@@ -784,7 +787,7 @@ return ln;
 #endif
 
 /*:124*/
-#line 15 "./libline.w"
+#line 18 "./libline.w"
 
 
 #line 1 "./header.w"

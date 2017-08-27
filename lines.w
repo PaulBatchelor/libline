@@ -158,7 +158,7 @@ void ll_add_step(ll_lines *l, ll_flt val, ll_flt dur)
 void ll_add_tick(ll_lines *l, ll_flt dur)
 {
     ll_point *pt;
-    pt = ll_line_append(l->line, 1.0, dur);
+    pt = ll_line_append(l->line, 0.0, dur);
     ll_tick(pt);
 }
 
