@@ -203,6 +203,7 @@ interface for constructing lines.
 @<Header Data@>+=
 void ll_add_linpoint(ll_lines *l, ll_flt val, ll_flt dur);
 void ll_add_exppoint(ll_lines *l, ll_flt val, ll_flt dur, ll_flt curve);
+void ll_add_step(ll_lines *l, ll_flt val, ll_flt dur);
 void ll_end(ll_lines *l);
 
 @* Sporth Function Declarations. An optional feature of libline is to have
