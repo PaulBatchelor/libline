@@ -107,6 +107,7 @@ int test_sporth(int argc , char *argv[])
     plumber_init(&pd);
     ll_sporth_ugen(lines, &pd, "ll");
 
+    ll_timescale_bpm(lines, 67);
     ll_sporth_line(lines, &pd, "freq");
     ll_add_exppoint(lines, 0.001, 2.0, 4.0);
     ll_add_linpoint(lines, 1, 0.5);

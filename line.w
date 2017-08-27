@@ -48,6 +48,11 @@ pointer |ud|.
 the end. 
 @<The Line@> += 
     int end;
+
+@ A timescaling variable speeds or slows down the units of time. This can
+be used to make the units of duration match to beats rather than just seconds.
+@<The Line@> += 
+    ll_flt tscale;
 @/};
 
 @ The size of |ll_line| is implemented as a function.
@@ -76,6 +81,17 @@ void ll_line_init(ll_line *ln, int sr)
     ln->counter = 0;
     ln->curpos = 0;
     ln->end = 0;
+    ln->tscale = 1.0;
+}
+
+@ The time scale of a line determines the rate at which line is stepped 
+through. A value of 1 has the line move normally. A value of 0.5, twice the 
+speed. A value of 2 at half-speed. 
+
+@<The Line@> += 
+void ll_line_timescale(ll_line *ln, ll_flt scale)
+{
+    ln->tscale = scale;
 }
 
 @* Appending a Point to a Line.
@@ -139,7 +155,7 @@ void ll_line_done(ll_line *ln)
 {
     ln->curpos = 0;
     ln->last = ln->root;
-    ln->idur = ll_point_get_dur(ln->root) * ln->sr;
+    ln->idur = ll_point_get_dur(ln->root) * ln->sr * ln->tscale;
     ln->counter = ln->idur;
     ln->end = 0;
 }
@@ -202,7 +218,7 @@ linked list. The duration in samples is computed, the counter is reset, and
 the position is incremented by one.
 @<The Line@> += 
             ln->last = ll_point_get_next_point(ln->last);
-            ln->idur = ll_point_get_dur(ln->last) * ln->sr;
+            ln->idur = ll_point_get_dur(ln->last) * ln->sr * ln->tscale;
             ln->counter = ln->idur;
             ln->curpos++;
 @ If there are no points left in the list, the line has ended, and the |end|

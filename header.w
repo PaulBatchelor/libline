@@ -168,13 +168,11 @@ in time.
 @<Header Data@>+=
 void ll_line_done(ll_line *ln);
 
-
 @ This function gets every
 sample inside of the audio loop, generating a single sample and moving forward
 in time by a single sample.
 @<Header Data@>+=
 ll_flt ll_line_step(ll_line *ln);
-
 
 @ This function will print all the points in a given line.
 @<Header Data@>+=
@@ -191,6 +189,10 @@ void ll_exppoint(ll_point *pt, ll_flt curve);
 @ Sets a point to be a tick.
 @<Header Data@>+=
 void ll_tick(ll_point *pt);
+
+@ Sets time scale of the line.
+@<Header Data@>+=
+void ll_line_timescale(ll_line *ln, ll_flt scale);
 
 @* Lines Function Declarations.
 @ These are the functions used for |ll_lines|. More words for this will be
@@ -211,6 +213,8 @@ void ll_add_exppoint(ll_lines *l, ll_flt val, ll_flt dur, ll_flt curve);
 void ll_add_step(ll_lines *l, ll_flt val, ll_flt dur);
 void ll_add_tick(ll_lines *l, ll_flt dur);
 void ll_end(ll_lines *l);
+void ll_timescale(ll_lines *l, ll_flt scale);
+void ll_timescale_bpm(ll_lines *l, ll_flt bpm);
 
 @* Sporth Function Declarations. An optional feature of libline is to have
 hooks into the Sporth programming language.

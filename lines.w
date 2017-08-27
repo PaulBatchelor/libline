@@ -27,6 +27,7 @@ struct ll_lines {
     void *ud;
     ll_line *line;
     ll_point *pt;
+    ll_flt tscale;
 };
 
 @* Lines Initialization.
@@ -51,6 +52,7 @@ void ll_lines_init(ll_lines *l, int sr)
     l->malloc = ll_malloc;
     l->free = ll_free;
     l->sr = sr;
+    l->tscale = 1.0;
 }
 
 @* Lines Memory Handling.
@@ -98,6 +100,7 @@ void ll_lines_append(ll_lines *l, ll_line **line, ll_flt **val)
     entry->val = 0.f;
     entry->ln = l->malloc(l->ud, ll_line_size());
     ll_line_init(entry->ln, l->sr);
+    ll_line_timescale(entry->ln, l->tscale);
   
     if(line != NULL) *line = entry->ln;
     if(val != NULL) *val = &entry->val;
@@ -165,4 +168,14 @@ void ll_add_tick(ll_lines *l, ll_flt dur)
 void ll_end(ll_lines *l)
 {
     ll_line_done(l->line);
+}
+
+void ll_timescale(ll_lines *l, ll_flt scale)
+{
+    l->tscale = scale;
+}
+
+void ll_timescale_bpm(ll_lines *l, ll_flt bpm)
+{
+    l->tscale = 60.0 / bpm;
 }
