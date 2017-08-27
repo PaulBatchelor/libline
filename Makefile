@@ -11,6 +11,7 @@ WEBFILES=$(NAME).w\
 		 lines.w\
 		 sporth.w\
 		 exppoint.w\
+		 tick.w\
 
 LDFLAGS=-lsporth -lsoundpipe -lsndfile -lm -ldl
 

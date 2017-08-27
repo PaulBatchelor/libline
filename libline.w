@@ -20,5 +20,6 @@ facility does not exist.
 @i lines
 @i linpoint
 @i exppoint
+@i tick 
 @i mem
 @i sporth

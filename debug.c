@@ -118,12 +118,21 @@ int test_sporth(int argc , char *argv[])
     ll_add_linpoint(lines, 6.7, 1.0);
     ll_end(lines);
 
+    ll_sporth_line(lines, &pd, "tk");
+    ll_add_step(lines, 0, 0.5);
+    ll_add_tick(lines, 1.0);
+    ll_add_tick(lines, 1.0);
+    ll_add_tick(lines, 1.0);
+    ll_add_step(lines, 0, 1.0);
+    ll_end(lines);
 
     /* parse sporth string */
 
     plumber_parse_string(&pd, 
-        "_ll fe _freq get 300 880 scale 0.3 1 1 _index get fm "
-        );
+        "_ll fe _freq get 300 880 scale 0.2 1 1 _index get fm "
+        "_tk get 0.001 0.001 0.2 tenvx 1000 0.5 sine * +"
+    );
+
     plumber_compute(&pd, PLUMBER_INIT);
 
     sp_process(sp, &pd, process_sporth);

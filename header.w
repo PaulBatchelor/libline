@@ -187,6 +187,10 @@ void ll_linpoint(ll_point *pt);
 @<Header Data@>+=
 void ll_exppoint(ll_point *pt, ll_flt curve);
 
+@ Sets a point to be a tick.
+@<Header Data@>+=
+void ll_tick(ll_point *pt);
+
 @* Lines Function Declarations.
 @ These are the functions used for |ll_lines|. More words for this will be
 added later if needed.
@@ -204,6 +208,7 @@ interface for constructing lines.
 void ll_add_linpoint(ll_lines *l, ll_flt val, ll_flt dur);
 void ll_add_exppoint(ll_lines *l, ll_flt val, ll_flt dur, ll_flt curve);
 void ll_add_step(ll_lines *l, ll_flt val, ll_flt dur);
+void ll_add_tick(ll_lines *l, ll_flt dur);
 void ll_end(ll_lines *l);
 
 @* Sporth Function Declarations. An optional feature of libline is to have

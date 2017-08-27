@@ -152,8 +152,14 @@ void ll_add_exppoint(ll_lines *l, ll_flt val, ll_flt dur, ll_flt curve)
 
 void ll_add_step(ll_lines *l, ll_flt val, ll_flt dur)
 {
+    ll_line_append(l->line, val, dur);
+}
+
+void ll_add_tick(ll_lines *l, ll_flt dur)
+{
     ll_point *pt;
-    pt = ll_line_append(l->line, val, dur);
+    pt = ll_line_append(l->line, 1.0, dur);
+    ll_tick(pt);
 }
 
 void ll_end(ll_lines *l)
