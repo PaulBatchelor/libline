@@ -195,6 +195,10 @@ void ll_tick(ll_point *pt);
 @<Header Data@>+=
 void ll_line_timescale(ll_line *ln, ll_flt scale);
 
+@ The function |ll_line_bind_float| binds a float value to a line.
+@<Header Data@>+=
+void ll_line_bind_float(ll_line *ln, ll_flt *line);
+
 @* Lines Function Declarations.
 @ These are the functions used for |ll_lines|. More words for this will be
 added later if needed.

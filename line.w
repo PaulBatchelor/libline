@@ -53,6 +53,15 @@ the end.
 be used to make the units of duration match to beats rather than just seconds.
 @<The Line@> += 
     ll_flt tscale;
+
+@ When a line produces a sample of audio, it saves a copy of it to a pointer. 
+By default, this pointer points to an internal value. However, it can be
+overriden later by other applications who wish to read the data directly.
+
+@<The Line@> += 
+    ll_flt *val;
+    ll_flt ival;
+
 @/};
 
 @ The size of |ll_line| is implemented as a function.
@@ -82,6 +91,7 @@ void ll_line_init(ll_line *ln, int sr)
     ln->curpos = 0;
     ln->end = 0;
     ln->tscale = 1.0;
+    ln->val = &ln->ival;
 }
 
 @ The time scale of a line determines the rate at which line is stepped 
@@ -119,7 +129,6 @@ void ll_line_append_point(ll_line *ln, ll_point *p)
     ln->last = p;
     ln->size++;
 }
-
 
 @ The function |ll_line_append_point| assumes that memory is already allocated.
 This, however, is a very inconvenient burden for the programmer to keep
@@ -247,10 +256,13 @@ decremented right before the point step function is called.
     dur = ln->idur;
     pos = dur - ln->counter;
     ln->counter--;
-    return ll_point_step(ln->last, pos, dur); @/
+    *ln->val = ll_point_step(ln->last, pos, dur);
+    return *ln->val;
 }
 
-@* Printing Line Data.
+@* Other Functions. The following section is for functions that couldn't quite
+fit anywhere else.
+
 @ Sometimes it can be useful to print points in a line. |ll_line_print|  
 does just that, walking through the list and printing the values.
 
@@ -275,4 +287,13 @@ void ll_line_print(ll_line *ln)
 
         pt = next;
     }
+}
+
+@ In Sporth, it is a better arrangement to have a Sporth float be injected into
+libline, rather than a libline float injected into Sporth. This function
+binds a float pointer to a line.
+@<The Line@> += 
+void ll_line_bind_float(ll_line *ln, ll_flt *line)
+{
+    ln->val = line;
 }

@@ -25,13 +25,13 @@ void ll_sporth_ugen(ll_lines *l, plumber_data *pd, const char *ugen)
 ll_line * ll_sporth_line(ll_lines *l, plumber_data *pd, const char *name)
 {
     ll_line *ln;
-    ll_flt *val;
+    SPFLOAT *val;
 
-    ll_lines_append(l, &ln, &val);
+    ll_lines_append(l, &ln, NULL);
 
-    plumber_ftmap_delete(pd, 0);
-    plumber_ftmap_add_userdata(pd, name, val);
-    plumber_ftmap_delete(pd, 1);
+    plumber_create_var(pd, name, &val);
+    ll_line_bind_float(ln, val);
+
     return ln;
 }
 
