@@ -160,6 +160,15 @@ void ll_line_done(ll_line *ln)
     ln->end = 0;
 }
 
+@ The function |ll_line_done| also can be called at any point to rewind the
+line to the beginning. 
+
+@<The Line@>+=
+void ll_line_reset(ll_line *ln)
+{
+    ll_line_done(ln);
+}
+
 @* Freeing Line Memory. 
 @ All things that must be allocated internally must then be freed using 
 the function |ll_line_free|. This function essentially walks through the 

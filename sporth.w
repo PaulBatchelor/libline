@@ -13,7 +13,7 @@ the lines at every sample. This unit generator should be instantiated exactly
 once at the top of the Sporth patch.
 
 @<Sporth@>+=
-@<The Sporth Unit Generator@>@/
+@<The Sporth Unit Generators@>@/
 void ll_sporth_ugen(ll_lines *l, plumber_data *pd, const char *ugen)
 {
     plumber_ftmap_add_function(pd, ugen, sporth_ll, l);
@@ -37,12 +37,49 @@ ll_line * ll_sporth_line(ll_lines *l, plumber_data *pd, const char *name)
 
 @ The following is the Sporth unit generator 
 callback used inside of Sporth. 
-@<The Sporth Unit Generator @>+=
+@<The Sporth Unit Generators@>+=
 static int sporth_ll(plumber_data *pd, sporth_stack *stack, void **ud)
 {
     ll_lines *l;
     l = *ud;
     if(pd->mode == PLUMBER_COMPUTE) ll_lines_step(l);
     return PLUMBER_OK;
+}
+
+@ Triggers in Sporth can be leveraged to schedule lines. After creating a 
+new line for Sporth to read via |ll_sporth_line|, a ugen can be created to 
+reset that line with a trigger via |ll_line_reset|.
+
+@<The Sporth Unit Generators@>+=
+static int sporth_ll_reset(plumber_data *pd, sporth_stack *stack, void **ud)
+{
+    ll_line *ln;
+    SPFLOAT tick;
+    ln = *ud;
+    switch(pd->mode) {
+        case PLUMBER_COMPUTE:
+            tick = sporth_stack_pop_float(stack);
+            if(tick) {
+                ll_line_reset(ln);
+            }
+            break;
+        case PLUMBER_CREATE:
+        case PLUMBER_INIT:
+            sporth_stack_pop_float(stack);
+            break;
+    }
+    return PLUMBER_OK;
+}
+
+@ The ugen function must be bound to a named ftable in Sporth, where the user
+data is the line.
+
+@<Sporth@>+=
+
+void ll_sporth_reset_ugen(ll_lines *l, plumber_data *pd, const char *ugen)
+{
+    ll_line *ln;
+    ln = ll_lines_current_line(l);
+    plumber_ftmap_add_function(pd, ugen, sporth_ll_reset, ln);
 }
 

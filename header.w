@@ -163,10 +163,11 @@ void ll_line_mem_callback(ll_line *ln, ll_cb_malloc m, ll_cb_free f);
 
 @ Once all points have been added, the line is finalized and rewound to the
 beginning, where it can be ready to be computed as an audio-rate signal 
-in time.
+in time. 
 
 @<Header Data@>+=
 void ll_line_done(ll_line *ln);
+void ll_line_reset(ll_line *ln);
 
 @ This function gets every
 sample inside of the audio loop, generating a single sample and moving forward
@@ -204,6 +205,7 @@ void ll_lines_mem_callback(ll_lines *l, void *ud, ll_cb_malloc m, ll_cb_free f);
 void ll_lines_append(ll_lines *l, ll_line **line, ll_flt **val);
 void ll_lines_step(ll_lines *l);
 void ll_lines_free(ll_lines *l);
+ll_line * ll_lines_current_line(ll_lines *l);
 
 @* High-level Interface Declarations. These functions provide a convenient
 interface for constructing lines.
@@ -223,5 +225,6 @@ hooks into the Sporth programming language.
 #ifdef LL_SPORTH
 void ll_sporth_ugen(ll_lines *l, plumber_data *pd, const char *ugen);
 ll_line * ll_sporth_line(ll_lines *l, plumber_data *pd, const char *name);
+void ll_sporth_reset_ugen(ll_lines *l, plumber_data *pd, const char *ugen);
 #endif
 

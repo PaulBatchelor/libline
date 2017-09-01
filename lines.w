@@ -94,13 +94,13 @@ memory address of the |ll_line| is saved to the variable |val|.
 @<Lines@>+=
 void ll_lines_append(ll_lines *l, ll_line **line, ll_flt **val)
 {
-    ll_line_entry *entry;
+    @/ll_line_entry *entry;
    
     entry = l->malloc(l->ud, sizeof(ll_line_entry));
     entry->val = 0.f;
     entry->ln = l->malloc(l->ud, ll_line_size());
     ll_line_init(entry->ln, l->sr);
-    ll_line_timescale(entry->ln, l->tscale);
+    ll_line_timescale(entry->ln, l->tscale);@/
   
     if(line != NULL) *line = entry->ln;
     if(val != NULL) *val = &entry->val;
@@ -112,8 +112,18 @@ void ll_lines_append(ll_lines *l, ll_line **line, ll_flt **val)
     }
 
     l->size++;
-    l->last = entry;
-    l->line = entry->ln;
+    l->last = entry;@/
+    l->line = entry->ln;@/
+}
+
+@ The current line being created can be returned using a wrapper function called
+|ll_lines_get_current|. This function is needed in order to get line data
+bound to data in Sporth. 
+
+@<Lines@>+=
+ll_line * ll_lines_current_line(ll_lines *l)
+{
+    return l->line;
 }
 
 @* Lines Step Function.
