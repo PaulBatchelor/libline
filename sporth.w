@@ -19,17 +19,21 @@ void ll_sporth_ugen(ll_lines *l, plumber_data *pd, const char *ugen)
     plumber_ftmap_add_function(pd, ugen, sporth_ll, l);
 }
 
-@ |ll_sporth_line| registers a line as a named variable.
+@ |ll_sporth_line| registers a line as a named variable. 
 
 @<Sporth@>+=
 ll_line * ll_sporth_line(ll_lines *l, plumber_data *pd, const char *name)
 {
     ll_line *ln;
     SPFLOAT *val;
+    int rc;
 
     ll_lines_append(l, &ln, NULL);
 
-    plumber_create_var(pd, name, &val);
+    rc = plumber_ftmap_search_userdata(pd, name, (void **)&val);
+    if(rc == PLUMBER_NOTOK) {
+        plumber_create_var(pd, name, &val);
+    }
     ll_line_bind_float(ln, val);
 
     return ln;

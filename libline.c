@@ -807,7 +807,7 @@ void ll_free_nothing(void*ud,void*ptr)
 #line 15 "./sporth.w"
 
 /*135:*/
-#line 40 "./sporth.w"
+#line 44 "./sporth.w"
 
 static int sporth_ll(plumber_data*pd,sporth_stack*stack,void**ud)
 {
@@ -818,7 +818,7 @@ return PLUMBER_OK;
 }
 
 /*:135*//*136:*/
-#line 53 "./sporth.w"
+#line 57 "./sporth.w"
 
 static int sporth_ll_reset(plumber_data*pd,sporth_stack*stack,void**ud)
 {
@@ -855,17 +855,21 @@ ll_line*ll_sporth_line(ll_lines*l,plumber_data*pd,const char*name)
 {
 ll_line*ln;
 SPFLOAT*val;
+int rc;
 
 ll_lines_append(l,&ln,NULL);
 
+rc= plumber_ftmap_search_userdata(pd,name,(void**)&val);
+if(rc==PLUMBER_NOTOK){
 plumber_create_var(pd,name,&val);
+}
 ll_line_bind_float(ln,val);
 
 return ln;
 }
 
 /*:134*//*137:*/
-#line 77 "./sporth.w"
+#line 81 "./sporth.w"
 
 
 void ll_sporth_reset_ugen(ll_lines*l,plumber_data*pd,const char*ugen)
