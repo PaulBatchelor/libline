@@ -25,7 +25,7 @@ struct ll_lines {
     ll_cb_malloc malloc;
     ll_cb_free free;
     void *ud;
-    ll_line *line;
+    ll_line *ln;
     ll_point *pt;
     ll_flt tscale;
 };
@@ -88,11 +88,11 @@ void ll_lines_free(ll_lines *l)
 
 @* Appending a Line to Lines.
 @ This creates and appends a new |ll_line| to the |ll_lines| linked list.
-The address of this new |ll_line| is saved to the variable |line|. The output
+The address of this new |ll_line| is saved to the variable |pline|. The output
 memory address of the |ll_line| is saved to the variable |val|. 
 
 @<Lines@>+=
-void ll_lines_append(ll_lines *l, ll_line **line, ll_flt **val)
+void ll_lines_append(ll_lines *l, ll_line **pline, ll_flt **val)
 {
     ll_line_entry *entry;
    
@@ -102,7 +102,7 @@ void ll_lines_append(ll_lines *l, ll_line **line, ll_flt **val)
     ll_line_init(entry->ln, l->sr);
     ll_line_timescale(entry->ln, l->tscale);
   
-    if(line != NULL) *line = entry->ln;
+    if(pline != NULL) *pline = entry->ln;
     if(val != NULL) *val = &entry->val;
 
     if(l->size == 0) {
@@ -113,7 +113,7 @@ void ll_lines_append(ll_lines *l, ll_line **line, ll_flt **val)
 
     l->size++;
     l->last = entry;
-    l->line = entry->ln;
+    l->ln = entry->ln;
 }
 
 @ The current line being created can be returned using a wrapper function called
@@ -123,7 +123,7 @@ bound to data in Sporth.
 @<Lines@>+=
 ll_line * ll_lines_current_line(ll_lines *l)
 {
-    return l->line;
+    return l->ln;
 }
 
 @* Lines Step Function.
@@ -152,32 +152,32 @@ languages like Lua.
 void ll_add_linpoint(ll_lines *l, ll_flt val, ll_flt dur)
 {
     ll_point *pt;
-    pt = ll_line_append(l->line, val, dur);
+    pt = ll_line_append(l->ln, val, dur);
     ll_linpoint(pt);
 }
 
 void ll_add_exppoint(ll_lines *l, ll_flt val, ll_flt dur, ll_flt curve)
 {
     ll_point *pt;
-    pt = ll_line_append(l->line, val, dur);
+    pt = ll_line_append(l->ln, val, dur);
     ll_exppoint(pt, curve);
 }
 
 void ll_add_step(ll_lines *l, ll_flt val, ll_flt dur)
 {
-    ll_line_append(l->line, val, dur);
+    ll_line_append(l->ln, val, dur);
 }
 
 void ll_add_tick(ll_lines *l, ll_flt dur)
 {
     ll_point *pt;
-    pt = ll_line_append(l->line, 0.0, dur);
+    pt = ll_line_append(l->ln, 0.0, dur);
     ll_tick(pt);
 }
 
 void ll_end(ll_lines *l)
 {
-    ll_line_done(l->line);
+    ll_line_done(l->ln);
 }
 
 void ll_timescale(ll_lines *l, ll_flt scale)

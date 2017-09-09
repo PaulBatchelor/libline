@@ -476,7 +476,7 @@ int sr;
 ll_cb_malloc malloc;
 ll_cb_free free;
 void*ud;
-ll_line*line;
+ll_line*ln;
 ll_point*pt;
 ll_flt tscale;
 };
@@ -537,7 +537,7 @@ entry= next;
 /*:111*//*113:*/
 #line 94 "./lines.w"
 
-void ll_lines_append(ll_lines*l,ll_line**line,ll_flt**val)
+void ll_lines_append(ll_lines*l,ll_line**pline,ll_flt**val)
 {
 ll_line_entry*entry;
 
@@ -547,7 +547,7 @@ entry->ln= l->malloc(l->ud,ll_line_size());
 ll_line_init(entry->ln,l->sr);
 ll_line_timescale(entry->ln,l->tscale);
 
-if(line!=NULL)*line= entry->ln;
+if(pline!=NULL)*pline= entry->ln;
 if(val!=NULL)*val= &entry->val;
 
 if(l->size==0){
@@ -558,7 +558,7 @@ l->last->next= entry;
 
 l->size++;
 l->last= entry;
-l->line= entry->ln;
+l->ln= entry->ln;
 }
 
 /*:113*//*114:*/
@@ -566,7 +566,7 @@ l->line= entry->ln;
 
 ll_line*ll_lines_current_line(ll_lines*l)
 {
-return l->line;
+return l->ln;
 }
 
 /*:114*//*116:*/
@@ -591,32 +591,32 @@ entry= entry->next;
 void ll_add_linpoint(ll_lines*l,ll_flt val,ll_flt dur)
 {
 ll_point*pt;
-pt= ll_line_append(l->line,val,dur);
+pt= ll_line_append(l->ln,val,dur);
 ll_linpoint(pt);
 }
 
 void ll_add_exppoint(ll_lines*l,ll_flt val,ll_flt dur,ll_flt curve)
 {
 ll_point*pt;
-pt= ll_line_append(l->line,val,dur);
+pt= ll_line_append(l->ln,val,dur);
 ll_exppoint(pt,curve);
 }
 
 void ll_add_step(ll_lines*l,ll_flt val,ll_flt dur)
 {
-ll_line_append(l->line,val,dur);
+ll_line_append(l->ln,val,dur);
 }
 
 void ll_add_tick(ll_lines*l,ll_flt dur)
 {
 ll_point*pt;
-pt= ll_line_append(l->line,0.0,dur);
+pt= ll_line_append(l->ln,0.0,dur);
 ll_tick(pt);
 }
 
 void ll_end(ll_lines*l)
 {
-ll_line_done(l->line);
+ll_line_done(l->ln);
 }
 
 void ll_timescale(ll_lines*l,ll_flt scale)
