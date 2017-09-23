@@ -68,5 +68,6 @@ clean:
 	rm -rf line_4.rnt line_4.png
 	rm -rf line_5.rnt line_5.png
 	rm -rf line_6.rnt line_6.png
-	rm -rf line_6.rnt line_7.png
-	rm -rf line_6.rnt line_8.png
+	rm -rf line_7.rnt line_7.png
+	rm -rf line_8.rnt line_8.png
+	rm -rf line_9.rnt line_9.png
