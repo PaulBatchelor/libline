@@ -60,7 +60,10 @@ clean:
 	rm -rf $(NAME).a
 	rm -rf $(NAME).o
 	rm -rf mkplots 
+	rm -rf debug
 	rm -rf line_1.rnt line_1.png
 	rm -rf line_2.rnt line_2.png
 	rm -rf line_3.rnt line_3.png
-	rm -rf debug
+	rm -rf line_4.rnt line_4.png
+	rm -rf line_5.rnt line_5.png
+	rm -rf line_6.rnt line_6.png
