@@ -6,6 +6,8 @@
 : xy ypadding + swap xpadding + swap ;
 : pt xy cr cairo_line_to ;
 : mv xy cr cairo_move_to ;
+: dot xy 3 0 2 cr cairo_arc cr cairo_fill ;
+: done cr cairo_stroke ;
 : rgbizer 
 # rgb
 255 /
@@ -33,6 +35,5 @@ blue cr cairo_set_source_rgb
 
 2 argv eval
 
-cr cairo_stroke
 3 argv surface cairo_surface_write_to_png
 surface cr cairo_free

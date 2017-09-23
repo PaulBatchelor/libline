@@ -199,6 +199,12 @@ void ll_line_timescale(ll_line *ln, ll_flt scale);
 @<Header Data@>+=
 void ll_line_bind_float(ll_line *ln, ll_flt *line);
 
+@ The functions below are needed to be able to access points on the line.
+@<Header Data@>+=
+ll_point* ll_line_top_point(ll_line *ln);
+int ll_line_npoints(ll_line *ln);
+
+
 @* Lines Function Declarations.
 @ These are the functions used for |ll_lines|. More words for this will be
 added later if needed.

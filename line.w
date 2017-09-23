@@ -297,3 +297,21 @@ void ll_line_bind_float(ll_line *ln, ll_flt *line)
 {
     ln->val = line;
 }
+
+@ To access all points in a line, one only needs the top point. Since points
+are entries in a linked list, one can step through the line using 
+|ll_get_next_point|.
+
+@<The Line@> += 
+ll_point* ll_line_top_point(ll_line *ln)
+{
+    return ln->root;
+}
+
+@ The function |ll_line_npoints| returns the number of points in a line. 
+
+@<The Line@> += 
+int ll_line_npoints(ll_line *ln)
+{
+    return ln->size;
+}
