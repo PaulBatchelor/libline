@@ -254,6 +254,36 @@ void line_7()
     free(line);
 }
 
+/* ticked line */
+
+void line_8()
+{
+    FILE *fp;
+    ll_line *line; 
+    ll_point *pt;
+
+    fp = fopen("line_8.rnt", "w");
+    line = malloc(ll_line_size());
+    ll_line_init(line, PIXELS_PER_SECOND);
+
+    pt = ll_line_append(line, 1.f, 1.f);
+    ll_tick(pt);
+    pt = ll_line_append(line, 1.f, 1.f);
+    ll_tick(pt);
+    pt = ll_line_append(line, 1.f, 1.f);
+    ll_tick(pt);
+    pt = ll_line_append(line, 1.f, 1.f);
+    ll_tick(pt);
+    ll_line_done(line);
+
+    render_line(fp, line);
+    render_dots(fp, line);
+
+    fclose(fp);
+    ll_line_free(line);
+    free(line);
+}
+
 
 int main()
 {
@@ -264,5 +294,6 @@ int main()
     line_5();
     line_6();
     line_7();
+    line_8();
     return 0;
 }
