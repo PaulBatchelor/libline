@@ -1,5 +1,5 @@
 /*1:*/
-#line 10 "./libline.w"
+#line 7 "./libline.w"
 
 #include <stdlib.h> 
 #include <stdio.h> 
@@ -900,7 +900,7 @@ plumber_ftmap_add_function(pd,ugen,sporth_ll_reset,ln);
 #endif
 
 /*:135*/
-#line 18 "./libline.w"
+#line 15 "./libline.w"
 
 
 #line 1 "./header.w"
