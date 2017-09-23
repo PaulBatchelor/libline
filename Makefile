@@ -61,4 +61,6 @@ clean:
 	rm -rf $(NAME).o
 	rm -rf mkplots 
 	rm -rf line_1.rnt line_1.png
+	rm -rf line_2.rnt line_2.png
+	rm -rf line_3.rnt line_3.png
 	rm -rf debug

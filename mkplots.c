@@ -56,8 +56,76 @@ void line_1()
     free(line);
 }
 
+void line_2()
+{
+    unsigned int i;
+    ll_flt val;
+    FILE *fp;
+
+    ll_line *line; 
+    ll_point *pt;
+
+    fp = fopen("line_2.rnt", "w");
+    line = malloc(ll_line_size());
+    ll_line_init(line, PIXELS_PER_SECOND);
+    pt = ll_line_append(line, 0.f, 4.f);
+    ll_exppoint(pt, 2.f);
+    ll_line_append(line, 1.f, 1.f);
+    ll_line_done(line);
+
+    for(i =0; i <= WIDTH; i++) {
+        val = ll_line_step(line);
+        /* flip the Y value to make origin bottom left */
+        val = 1 - val;
+        if(i == 0) {
+            fprintf(fp, "%d %g mv\n", i, val*SCALE);
+        } else {
+            fprintf(fp, "%d %g pt\n", i, val*SCALE);
+        }
+    }
+
+    fclose(fp);
+    ll_line_free(line);
+    free(line);
+}
+
+void line_3()
+{
+    unsigned int i;
+    ll_flt val;
+    FILE *fp;
+
+    ll_line *line; 
+    ll_point *pt;
+
+    fp = fopen("line_3.rnt", "w");
+    line = malloc(ll_line_size());
+    ll_line_init(line, PIXELS_PER_SECOND);
+    pt = ll_line_append(line, 0.f, 4.f);
+    ll_exppoint(pt, -4.f);
+    ll_line_append(line, 1.f, 1.f);
+    ll_line_done(line);
+
+    for(i =0; i <= WIDTH; i++) {
+        val = ll_line_step(line);
+        /* flip the Y value to make origin bottom left */
+        val = 1 - val;
+        if(i == 0) {
+            fprintf(fp, "%d %g mv\n", i, val*SCALE);
+        } else {
+            fprintf(fp, "%d %g pt\n", i, val*SCALE);
+        }
+    }
+
+    fclose(fp);
+    ll_line_free(line);
+    free(line);
+}
+
 int main()
 {
     line_1();
+    line_2();
+    line_3();
     return 0;
 }

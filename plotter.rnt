@@ -1,8 +1,11 @@
 [
 : cr ptr ;
 : surface ptr ;
-: pt cr cairo_line_to ;
-: mv cr cairo_move_to ;
+: xpadding 12 ;
+: ypadding 12 ;
+: xy ypadding + swap xpadding + swap ;
+: pt xy cr cairo_line_to ;
+: mv xy cr cairo_move_to ;
 : rgbizer 
 # rgb
 255 /
@@ -18,7 +21,8 @@ rot ;
 : gunmetal 16 16 16 rgbizer ;
 ]
 
-400 200 cairo_image_surface_create _surface setptr
+400 xpadding 2 * +  200 ypadding 2 * + cairo_image_surface_create 
+_surface setptr
 surface cairo_create _cr setptr
 
 gunmetal cr cairo_set_source_rgb
