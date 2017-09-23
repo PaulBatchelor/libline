@@ -35,6 +35,12 @@ $(NAME).a: $(NAME).o
 debug: debug.c $(NAME).o 
 	$(CC) $(CFLAGS) debug.c -o $@ $(NAME).o $(LDFLAGS)
 
+mkplots: mkplots.c $(NAME).o
+	$(CC) $(CFLAGS) mkplots.c -o $@ $(NAME).o $(LDFLAGS)
+
+plot: 
+	sh render_plots.sh
+
 $(NAME).pdf: $(WEBFILES)
 	cweave $(NAME).w
 	tex "\let\pdf+ \input $(NAME)"
@@ -53,4 +59,6 @@ clean:
 	rm -rf $(NAME).tex
 	rm -rf $(NAME).a
 	rm -rf $(NAME).o
+	rm -rf mkplots 
+	rm -rf line_1.rnt line_1.png
 	rm -rf debug

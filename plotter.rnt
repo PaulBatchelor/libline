@@ -1,0 +1,34 @@
+[
+: cr ptr ;
+: surface ptr ;
+: pt cr cairo_line_to ;
+: mv cr cairo_move_to ;
+: rgbizer 
+# rgb
+255 /
+rot 
+# gbr
+255 /
+rot
+# brg
+255 /
+# rgb
+rot ;
+: blue 0 135 189 rgbizer ;
+: gunmetal 16 16 16 rgbizer ;
+]
+
+400 200 cairo_image_surface_create _surface setptr
+surface cairo_create _cr setptr
+
+gunmetal cr cairo_set_source_rgb
+
+cr cairo_paint
+
+blue cr cairo_set_source_rgb
+
+2 argv eval
+
+cr cairo_stroke
+3 argv surface cairo_surface_write_to_png
+surface cr cairo_free
