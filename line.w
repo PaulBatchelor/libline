@@ -108,7 +108,7 @@ void ll_line_timescale(ll_line *ln, ll_flt scale)
 @ Points are added to a line in chronological order because they are appended
 to the end of a linked list. 
 
-A new line that zero points must set the root
+A new line with zero points must set the root
 of the linked list with the added point.  For the case when there are already 
 items populated in the linked list, the last pointer entry is used. The "next" 
 entry in this pointer is set to be the appended point. The "B" value of the
