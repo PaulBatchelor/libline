@@ -8,9 +8,9 @@
 #include "plumber.h"
 #endif
 #include "line.h"
-/*44:*/
+/*45:*/
 #line 3 "./point.w"
-/*46:*/
+/*47:*/
 #line 9 "./point.w"
 
 struct ll_point{
@@ -18,25 +18,25 @@ ll_flt A;
 ll_flt dur;
 ll_flt*B;
 
-/*:46*//*47:*/
+/*:47*//*48:*/
 #line 18 "./point.w"
 
 ll_point*next;
 
-/*:47*//*48:*/
+/*:48*//*49:*/
 #line 24 "./point.w"
 
 ll_cb_malloc malloc;
 ll_cb_free free;
 void*ud;
 
-/*:48*//*49:*/
+/*:49*//*50:*/
 #line 32 "./point.w"
 
 void*data;
 ll_cb_free destroy;
 
-/*:49*//*50:*/
+/*:50*//*51:*/
 #line 38 "./point.w"
 
 ll_cb_step step;
@@ -44,7 +44,7 @@ ll_cb_step step;
 
 };
 
-/*:50*//*52:*/
+/*:51*//*53:*/
 #line 47 "./point.w"
 
 size_t ll_point_size(void)
@@ -52,10 +52,10 @@ size_t ll_point_size(void)
 return sizeof(ll_point);
 }
 
-/*:52*//*53:*/
+/*:53*//*54:*/
 #line 55 "./point.w"
 
-/*66:*/
+/*67:*/
 #line 164 "./point.w"
 
 static ll_flt step(ll_point*pt,void*ud,UINT pos,UINT dur)
@@ -63,7 +63,7 @@ static ll_flt step(ll_point*pt,void*ud,UINT pos,UINT dur)
 return ll_point_A(pt);
 }
 
-/*:66*//*67:*/
+/*:67*//*68:*/
 #line 173 "./point.w"
 
 void ll_point_data(ll_point*pt,void*data)
@@ -81,7 +81,7 @@ void ll_point_cb_destroy(ll_point*pt,ll_cb_free destroy)
 pt->destroy= destroy;
 }
 
-/*:67*/
+/*:68*/
 #line 56 "./point.w"
 
 void ll_point_init(ll_point*pt)
@@ -97,7 +97,7 @@ pt->destroy= ll_free_nothing;
 pt->step= step;
 }
 
-/*:53*//*55:*/
+/*:54*//*56:*/
 #line 74 "./point.w"
 
 void ll_point_value(ll_point*pt,ll_flt val)
@@ -106,7 +106,7 @@ pt->A= val;
 }
 
 
-/*:55*//*56:*/
+/*:56*//*57:*/
 #line 83 "./point.w"
 
 void ll_point_set_next_value(ll_point*pt,ll_flt*val)
@@ -114,7 +114,7 @@ void ll_point_set_next_value(ll_point*pt,ll_flt*val)
 pt->B= val;
 }
 
-/*:56*//*57:*/
+/*:57*//*58:*/
 #line 90 "./point.w"
 
 void ll_point_dur(ll_point*pt,ll_flt dur)
@@ -127,7 +127,7 @@ ll_flt ll_point_get_dur(ll_point*pt)
 return pt->dur;
 }
 
-/*:57*//*58:*/
+/*:58*//*59:*/
 #line 102 "./point.w"
 
 void ll_point_set_next_point(ll_point*pt,ll_point*next)
@@ -135,7 +135,7 @@ void ll_point_set_next_point(ll_point*pt,ll_point*next)
 pt->next= next;
 }
 
-/*:58*//*59:*/
+/*:59*//*60:*/
 #line 109 "./point.w"
 
 ll_point*ll_point_get_next_point(ll_point*pt)
@@ -143,7 +143,7 @@ ll_point*ll_point_get_next_point(ll_point*pt)
 return pt->next;
 }
 
-/*:59*//*60:*/
+/*:60*//*61:*/
 #line 118 "./point.w"
 
 ll_flt*ll_point_get_value(ll_point*pt)
@@ -151,7 +151,7 @@ ll_flt*ll_point_get_value(ll_point*pt)
 return&pt->A;
 }
 
-/*:60*//*61:*/
+/*:61*//*62:*/
 #line 126 "./point.w"
 
 ll_flt ll_point_A(ll_point*pt)
@@ -164,7 +164,7 @@ ll_flt ll_point_B(ll_point*pt)
 return*pt->B;
 }
 
-/*:61*//*63:*/
+/*:62*//*64:*/
 #line 142 "./point.w"
 
 void*ll_point_malloc(ll_point*pt,size_t size)
@@ -176,7 +176,7 @@ void ll_point_free(ll_point*pt,void*ptr)
 pt->free(pt->ud,ptr);
 }
 
-/*:63*//*64:*/
+/*:64*//*65:*/
 #line 154 "./point.w"
 
 void ll_point_destroy(ll_point*pt)
@@ -184,7 +184,7 @@ void ll_point_destroy(ll_point*pt)
 pt->destroy(pt,pt->data);
 }
 
-/*:64*//*68:*/
+/*:65*//*69:*/
 #line 190 "./point.w"
 
 ll_flt ll_point_step(ll_point*pt,UINT pos,UINT dur)
@@ -192,7 +192,7 @@ ll_flt ll_point_step(ll_point*pt,UINT pos,UINT dur)
 return pt->step(pt,pt->data,pos,dur);
 }
 
-/*:68*//*69:*/
+/*:69*//*70:*/
 #line 199 "./point.w"
 
 void ll_point_mem_callback(ll_point*pt,ll_cb_malloc m,ll_cb_free f)
@@ -201,13 +201,13 @@ pt->malloc= m;
 pt->free= f;
 }
 #line 1 "./line.w"
-/*:69*/
+/*:70*/
 #line 3 "./point.w"
 
 
-/*:44*//*70:*/
+/*:45*//*71:*/
 #line 4 "./line.w"
-/*72:*/
+/*73:*/
 #line 10 "./line.w"
 
 struct ll_line{
@@ -216,43 +216,43 @@ ll_point*last;
 int size;
 int curpos;
 
-/*:72*//*73:*/
+/*:73*//*74:*/
 #line 20 "./line.w"
 
 int sr;
 
-/*:73*//*74:*/
+/*:74*//*75:*/
 #line 26 "./line.w"
 
 unsigned int counter;
 
-/*:74*//*75:*/
+/*:75*//*76:*/
 #line 32 "./line.w"
 
 unsigned int idur;
 
-/*:75*//*76:*/
+/*:76*//*77:*/
 #line 38 "./line.w"
 
 ll_cb_malloc malloc;
 ll_cb_free free;
 
-/*:76*//*77:*/
+/*:77*//*78:*/
 #line 44 "./line.w"
 
 void*ud;
 
-/*:77*//*78:*/
+/*:78*//*79:*/
 #line 49 "./line.w"
 
 int end;
 
-/*:78*//*79:*/
+/*:79*//*80:*/
 #line 54 "./line.w"
 
 ll_flt tscale;
 
-/*:79*//*80:*/
+/*:80*//*81:*/
 #line 61 "./line.w"
 
 ll_flt*val;
@@ -260,7 +260,7 @@ ll_flt ival;
 
 };
 
-/*:80*//*81:*/
+/*:81*//*82:*/
 #line 68 "./line.w"
 
 size_t ll_line_size(void)
@@ -269,7 +269,7 @@ return sizeof(ll_line);
 }
 
 
-/*:81*//*83:*/
+/*:82*//*84:*/
 #line 80 "./line.w"
 
 void ll_line_init(ll_line*ln,int sr)
@@ -288,7 +288,7 @@ ln->tscale= 1.0;
 ln->val= &ln->ival;
 }
 
-/*:83*//*84:*/
+/*:84*//*85:*/
 #line 101 "./line.w"
 
 void ll_line_timescale(ll_line*ln,ll_flt scale)
@@ -296,7 +296,7 @@ void ll_line_timescale(ll_line*ln,ll_flt scale)
 ln->tscale= scale;
 }
 
-/*:84*//*86:*/
+/*:85*//*87:*/
 #line 120 "./line.w"
 
 void ll_line_append_point(ll_line*ln,ll_point*p)
@@ -311,7 +311,7 @@ ln->last= p;
 ln->size++;
 }
 
-/*:86*//*87:*/
+/*:87*//*88:*/
 #line 142 "./line.w"
 
 ll_point*ll_line_append(ll_line*ln,ll_flt val,ll_flt dur)
@@ -330,7 +330,7 @@ ll_line_append_point(ln,pt);
 return pt;
 }
 
-/*:87*//*88:*/
+/*:88*//*89:*/
 #line 162 "./line.w"
 
 void ll_line_done(ll_line*ln)
@@ -342,7 +342,7 @@ ln->counter= ln->idur;
 ln->end= 0;
 }
 
-/*:88*//*89:*/
+/*:89*//*90:*/
 #line 175 "./line.w"
 
 void ll_line_reset(ll_line*ln)
@@ -350,7 +350,7 @@ void ll_line_reset(ll_line*ln)
 ll_line_done(ln);
 }
 
-/*:89*//*91:*/
+/*:90*//*92:*/
 #line 185 "./line.w"
 
 void ll_line_free(ll_line*ln)
@@ -368,38 +368,38 @@ pt= next;
 }
 }
 
-/*:91*//*93:*/
+/*:92*//*94:*/
 #line 206 "./line.w"
 
 ll_flt ll_line_step(ll_line*ln)
 {
 UINT dur;
 UINT pos;
-/*:93*//*94:*/
+/*:94*//*95:*/
 #line 215 "./line.w"
 
 if(ln->end){
 return ll_point_A(ln->last);
 }
 
-/*:94*//*95:*/
+/*:95*//*96:*/
 #line 223 "./line.w"
 
 if(ln->counter==0){
 
-/*:95*//*96:*/
+/*:96*//*97:*/
 #line 231 "./line.w"
 
 if(ln->curpos<(ln->size-1)){
 
-/*:96*//*97:*/
+/*:97*//*98:*/
 #line 237 "./line.w"
 
 ln->last= ll_point_get_next_point(ln->last);
 ln->idur= ll_point_get_dur(ln->last)*ln->sr*ln->tscale;
 ln->counter= ln->idur;
 ln->curpos++;
-/*:97*//*98:*/
+/*:98*//*99:*/
 #line 244 "./line.w"
 
 }else{
@@ -407,7 +407,7 @@ ln->end= 1;
 }
 }
 
-/*:98*//*99:*/
+/*:99*//*100:*/
 #line 255 "./line.w"
 
 dur= ln->idur;
@@ -417,7 +417,7 @@ ln->counter--;
 return*ln->val;
 }
 
-/*:99*//*101:*/
+/*:100*//*102:*/
 #line 269 "./line.w"
 
 void ll_line_print(ll_line*ln)
@@ -442,7 +442,7 @@ pt= next;
 }
 }
 
-/*:101*//*102:*/
+/*:102*//*103:*/
 #line 295 "./line.w"
 
 void ll_line_bind_float(ll_line*ln,ll_flt*line)
@@ -450,7 +450,7 @@ void ll_line_bind_float(ll_line*ln,ll_flt*line)
 ln->val= line;
 }
 
-/*:102*//*103:*/
+/*:103*//*104:*/
 #line 305 "./line.w"
 
 ll_point*ll_line_top_point(ll_line*ln)
@@ -458,7 +458,7 @@ ll_point*ll_line_top_point(ll_line*ln)
 return ln->root;
 }
 
-/*:103*//*104:*/
+/*:104*//*105:*/
 #line 313 "./line.w"
 
 int ll_line_npoints(ll_line*ln)
@@ -466,13 +466,13 @@ int ll_line_npoints(ll_line*ln)
 return ln->size;
 }
 #line 1 "./lines.w"
-/*:104*/
+/*:105*/
 #line 4 "./line.w"
 
 
-/*:70*//*105:*/
+/*:71*//*106:*/
 #line 4 "./lines.w"
-/*107:*/
+/*108:*/
 #line 10 "./lines.w"
 
 typedef struct ll_line_entry{
@@ -481,7 +481,7 @@ ll_flt val;
 struct ll_line_entry*next;
 }ll_line_entry;
 
-/*:107*//*108:*/
+/*:108*//*109:*/
 #line 19 "./lines.w"
 
 struct ll_lines{
@@ -497,7 +497,7 @@ ll_point*pt;
 ll_flt tscale;
 };
 
-/*:108*//*110:*/
+/*:109*//*111:*/
 #line 37 "./lines.w"
 
 
@@ -506,7 +506,7 @@ size_t ll_lines_size()
 return sizeof(ll_lines);
 }
 
-/*:110*//*111:*/
+/*:111*//*112:*/
 #line 46 "./lines.w"
 
 void ll_lines_init(ll_lines*l,int sr)
@@ -520,7 +520,7 @@ l->sr= sr;
 l->tscale= 1.0;
 }
 
-/*:111*//*113:*/
+/*:112*//*114:*/
 #line 62 "./lines.w"
 
 void ll_lines_mem_callback(ll_lines*l,void*ud,ll_cb_malloc m,ll_cb_free f)
@@ -530,7 +530,7 @@ l->free= f;
 l->ud= ud;
 }
 
-/*:113*//*114:*/
+/*:114*//*115:*/
 #line 71 "./lines.w"
 
 void ll_lines_free(ll_lines*l)
@@ -550,7 +550,7 @@ entry= next;
 }
 }
 
-/*:114*//*116:*/
+/*:115*//*117:*/
 #line 94 "./lines.w"
 
 void ll_lines_append(ll_lines*l,ll_line**pline,ll_flt**val)
@@ -577,7 +577,7 @@ l->last= entry;
 l->ln= entry->ln;
 }
 
-/*:116*//*117:*/
+/*:117*//*118:*/
 #line 123 "./lines.w"
 
 ll_line*ll_lines_current_line(ll_lines*l)
@@ -585,7 +585,7 @@ ll_line*ll_lines_current_line(ll_lines*l)
 return l->ln;
 }
 
-/*:117*//*119:*/
+/*:118*//*120:*/
 #line 133 "./lines.w"
 
 void ll_lines_step(ll_lines*l)
@@ -601,7 +601,7 @@ entry= entry->next;
 }
 }
 
-/*:119*//*120:*/
+/*:120*//*121:*/
 #line 151 "./lines.w"
 
 void ll_add_linpoint(ll_lines*l,ll_flt val,ll_flt dur)
@@ -645,14 +645,14 @@ void ll_timescale_bpm(ll_lines*l,ll_flt bpm)
 l->tscale= 60.0/bpm;
 }
 #line 1 "./linpoint.w"
-/*:120*/
+/*:121*/
 #line 4 "./lines.w"
 
 
-/*:105*//*121:*/
+/*:106*//*122:*/
 #line 3 "./linpoint.w"
 
-/*122:*/
+/*123:*/
 #line 9 "./linpoint.w"
 
 typedef struct{
@@ -660,10 +660,10 @@ ll_flt inc;
 ll_flt acc;
 }linpoint;
 
-/*:122*//*123:*/
+/*:123*//*124:*/
 #line 18 "./linpoint.w"
 
-/*124:*/
+/*125:*/
 #line 33 "./linpoint.w"
 
 
@@ -684,7 +684,7 @@ lp->acc+= lp->inc;
 return val;
 }
 
-/*:124*//*125:*/
+/*:125*//*126:*/
 #line 53 "./linpoint.w"
 
 static void ll_linpoint_destroy(void*ud,void*ptr)
@@ -695,7 +695,7 @@ ll_point_free(pt,ptr);
 }
 
 #line 1 "./exppoint.w"
-/*:125*/
+/*:126*/
 #line 19 "./linpoint.w"
 
 void ll_linpoint(ll_point*pt)
@@ -707,14 +707,14 @@ ll_point_data(pt,lp);
 ll_point_cb_destroy(pt,ll_linpoint_destroy);
 }
 
-/*:123*/
+/*:124*/
 #line 4 "./linpoint.w"
 
 
-/*:121*//*126:*/
+/*:122*//*127:*/
 #line 3 "./exppoint.w"
 
-/*127:*/
+/*128:*/
 #line 8 "./exppoint.w"
 
 
@@ -722,10 +722,10 @@ typedef struct{
 SPFLOAT curve;
 }exppoint;
 
-/*:127*//*128:*/
+/*:128*//*129:*/
 #line 15 "./exppoint.w"
 
-/*129:*/
+/*130:*/
 #line 48 "./exppoint.w"
 
 static ll_flt exppoint_step(ll_point*pt,void*ud,UINT pos,UINT dur)
@@ -741,7 +741,7 @@ val= ll_point_A(pt)+
 return val;
 }
 
-/*:129*//*130:*/
+/*:130*//*131:*/
 #line 64 "./exppoint.w"
 
 static void exppoint_destroy(void*ud,void*ptr)
@@ -751,8 +751,8 @@ pt= ud;
 ll_point_free(pt,ptr);
 }
 
-#line 1 "./tick.w"
-/*:130*/
+#line 1 "./bezier.w"
+/*:131*/
 #line 16 "./exppoint.w"
 
 void ll_exppoint(ll_point*pt,ll_flt curve)
@@ -766,13 +766,125 @@ ll_point_cb_destroy(pt,exppoint_destroy);
 }
 
 
-/*:128*/
+/*:129*/
 #line 4 "./exppoint.w"
 
 
-/*:126*//*131:*/
+/*:127*//*132:*/
+#line 3 "./bezier.w"
+
+/*133:*/
+#line 8 "./bezier.w"
+
+typedef struct{
+ll_flt cx;
+ll_flt cy;
+}bezierpt;
+
+/*:133*//*134:*/
+#line 19 "./bezier.w"
+
+/*135:*/
+#line 33 "./bezier.w"
+
+/*136:*/
+#line 62 "./bezier.w"
+
+static ll_flt quadratic_equation(ll_flt a,ll_flt b,ll_flt c)
+{
+ll_flt det;
+
+det= b*b-4*a*c;
+if(det>=0){
+return((-b+sqrt(det))/(2.0*a));
+}else{
+return 0;
+}
+}
+
+/*:136*//*137:*/
+#line 76 "./bezier.w"
+
+static ll_flt find_t(ll_flt x1,ll_flt x2,ll_flt x3,int x)
+{
+ll_flt a;
+ll_flt b;
+ll_flt c;
+
+a= (x1-2.0*x2+x3);
+b= 2.0*(-x1+x2);
+c= x1-x;
+
+if(a){
+return quadratic_equation(a,b,c);
+}else{
+return(x-x1)/b;
+}
+
+}
+
+
+
+/*:137*/
+#line 34 "./bezier.w"
+
+static ll_flt bezier_step(ll_point*pt,void*ud,UINT pos,UINT dur)
+{
+bezierpt*bez;
+ll_flt x[3];
+ll_flt y[3];
+ll_flt t;
+ll_flt val;
+
+bez= ud;
+x[0]= 0.f;
+x[1]= bez->cx*dur;
+x[2]= dur;
+
+y[0]= ll_point_A(pt);
+y[1]= bez->cy;
+y[2]= ll_point_B(pt);
+
+t= find_t(x[0],x[1],x[2],pos);
+val= 
+(1.0-t)*(1.0-t)*y[0]+
+2.0*(1.0-t)*t*y[1]+
+t*t*y[2];
+
+return val;
+}
+
+/*:135*//*138:*/
+#line 98 "./bezier.w"
+
+static void bezier_destroy(void*ud,void*ptr)
+{
+ll_point*pt;
+pt= ud;
+ll_point_free(pt,ptr);
+}
+#line 1 "./tick.w"
+/*:138*/
+#line 20 "./bezier.w"
+
+void ll_bezier(ll_point*pt,ll_flt cx,ll_flt cy)
+{
+bezierpt*b;
+b= ll_point_malloc(pt,sizeof(bezierpt));
+b->cx= cx;
+b->cy= cy;
+ll_point_cb_step(pt,bezier_step);
+ll_point_data(pt,b);
+ll_point_cb_destroy(pt,bezier_destroy);
+}
+
+/*:134*/
+#line 4 "./bezier.w"
+
+
+/*:132*//*139:*/
 #line 5 "./tick.w"
-/*132:*/
+/*140:*/
 #line 10 "./tick.w"
 
 
@@ -785,7 +897,7 @@ return 0.0;
 }
 }
 
-/*:132*//*133:*/
+/*:140*//*141:*/
 #line 23 "./tick.w"
 
 void ll_tick(ll_point*pt)
@@ -793,11 +905,11 @@ void ll_tick(ll_point*pt)
 ll_point_cb_step(pt,tick_step);
 }
 #line 1 "./mem.w"
-/*:133*/
+/*:141*/
 #line 5 "./tick.w"
 
 
-/*:131*//*134:*/
+/*:139*//*142:*/
 #line 8 "./mem.w"
 
 void*ll_malloc(void*ud,size_t size)
@@ -815,14 +927,14 @@ void ll_free_nothing(void*ud,void*ptr)
 
 }
 #line 1 "./sporth.w"
-/*:134*//*135:*/
+/*:142*//*143:*/
 #line 4 "./sporth.w"
 
 #ifdef LL_SPORTH
-/*136:*/
+/*144:*/
 #line 15 "./sporth.w"
 
-/*138:*/
+/*146:*/
 #line 44 "./sporth.w"
 
 static int sporth_ll(plumber_data*pd,sporth_stack*stack,void**ud)
@@ -833,7 +945,7 @@ if(pd->mode==PLUMBER_COMPUTE)ll_lines_step(l);
 return PLUMBER_OK;
 }
 
-/*:138*//*139:*/
+/*:146*//*147:*/
 #line 57 "./sporth.w"
 
 static int sporth_ll_reset(plumber_data*pd,sporth_stack*stack,void**ud)
@@ -856,7 +968,7 @@ break;
 return PLUMBER_OK;
 }
 
-/*:139*/
+/*:147*/
 #line 16 "./sporth.w"
 
 void ll_sporth_ugen(ll_lines*l,plumber_data*pd,const char*ugen)
@@ -864,7 +976,7 @@ void ll_sporth_ugen(ll_lines*l,plumber_data*pd,const char*ugen)
 plumber_ftmap_add_function(pd,ugen,sporth_ll,l);
 }
 
-/*:136*//*137:*/
+/*:144*//*145:*/
 #line 24 "./sporth.w"
 
 ll_line*ll_sporth_line(ll_lines*l,plumber_data*pd,const char*name)
@@ -884,7 +996,7 @@ ll_line_bind_float(ln,val);
 return ln;
 }
 
-/*:137*//*140:*/
+/*:145*//*148:*/
 #line 81 "./sporth.w"
 
 
@@ -894,12 +1006,12 @@ ll_line*ln;
 ln= ll_lines_current_line(l);
 plumber_ftmap_add_function(pd,ugen,sporth_ll_reset,ln);
 }
-/*:140*/
+/*:148*/
 #line 6 "./sporth.w"
 
 #endif
 
-/*:135*/
+/*:143*/
 #line 15 "./libline.w"
 
 

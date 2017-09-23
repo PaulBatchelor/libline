@@ -172,25 +172,31 @@ void ll_exppoint(ll_point*pt,ll_flt curve);
 
 void ll_tick(ll_point*pt);
 
+
 /*:36*//*37:*/
-#line 195 "./header.w"
+#line 196 "./header.w"
+
+void ll_bezier(ll_point*pt,ll_flt cx,ll_flt cy);
+
+/*:37*//*38:*/
+#line 200 "./header.w"
 
 void ll_line_timescale(ll_line*ln,ll_flt scale);
 
-/*:37*//*38:*/
-#line 199 "./header.w"
+/*:38*//*39:*/
+#line 204 "./header.w"
 
 void ll_line_bind_float(ll_line*ln,ll_flt*line);
 
-/*:38*//*39:*/
-#line 203 "./header.w"
+/*:39*//*40:*/
+#line 208 "./header.w"
 
 ll_point*ll_line_top_point(ll_line*ln);
 int ll_line_npoints(ll_line*ln);
 
 
-/*:39*//*41:*/
-#line 211 "./header.w"
+/*:40*//*42:*/
+#line 216 "./header.w"
 
 size_t ll_lines_size();
 void ll_lines_init(ll_lines*l,int sr);
@@ -200,8 +206,8 @@ void ll_lines_step(ll_lines*l);
 void ll_lines_free(ll_lines*l);
 ll_line*ll_lines_current_line(ll_lines*l);
 
-/*:41*//*42:*/
-#line 222 "./header.w"
+/*:42*//*43:*/
+#line 227 "./header.w"
 
 void ll_add_linpoint(ll_lines*l,ll_flt val,ll_flt dur);
 void ll_add_exppoint(ll_lines*l,ll_flt val,ll_flt dur,ll_flt curve);
@@ -211,8 +217,8 @@ void ll_end(ll_lines*l);
 void ll_timescale(ll_lines*l,ll_flt scale);
 void ll_timescale_bpm(ll_lines*l,ll_flt bpm);
 
-/*:42*//*43:*/
-#line 234 "./header.w"
+/*:43*//*44:*/
+#line 239 "./header.w"
 
 #ifdef LL_SPORTH
 void ll_sporth_ugen(ll_lines*l,plumber_data*pd,const char*ugen);
@@ -221,7 +227,7 @@ void ll_sporth_reset_ugen(ll_lines*l,plumber_data*pd,const char*ugen);
 #endif
 
 #line 1 "./point.w"
-/*:43*/
+/*:44*/
 #line 13 "./header.w"
 
 #endif

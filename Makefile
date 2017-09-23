@@ -12,6 +12,7 @@ WEBFILES=$(NAME).w\
 		 sporth.w\
 		 exppoint.w\
 		 tick.w\
+		 bezier.w
 
 LDFLAGS=-lsporth -lsoundpipe -lsndfile -lm -ldl
 

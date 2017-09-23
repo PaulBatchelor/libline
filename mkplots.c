@@ -284,6 +284,31 @@ void line_8()
     free(line);
 }
 
+/* bezier line */
+void line_9()
+{
+    FILE *fp;
+    ll_line *line; 
+    ll_point *pt;
+
+    fp = fopen("line_9.rnt", "w");
+    line = malloc(ll_line_size());
+    ll_line_init(line, PIXELS_PER_SECOND);
+    pt = ll_line_append(line, 0.f, 2.f);
+    ll_bezier(pt, 0.3f, -0.2f);
+    pt = ll_line_append(line, 0.5f, 2.f);
+    ll_bezier(pt, 0.99f, 1.5f);
+    ll_line_append(line, 0.f, 2.f);
+    ll_line_done(line);
+
+    render_line(fp, line);
+    render_dots(fp, line);
+
+    fclose(fp);
+    ll_line_free(line);
+    free(line);
+}
+
 
 int main()
 {
@@ -295,5 +320,6 @@ int main()
     line_6();
     line_7();
     line_8();
+    line_9();
     return 0;
 }

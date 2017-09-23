@@ -191,6 +191,11 @@ void ll_exppoint(ll_point *pt, ll_flt curve);
 @<Header Data@>+=
 void ll_tick(ll_point *pt);
 
+
+@ Sets a point to be a bezier curve.
+@<Header Data@>+=
+void ll_bezier(ll_point *pt, ll_flt cx, ll_flt cy);
+
 @ Sets time scale of the line.
 @<Header Data@>+=
 void ll_line_timescale(ll_line *ln, ll_flt scale);

@@ -20,6 +20,7 @@ facilities do not exist.
 @i lines
 @i linpoint
 @i exppoint
+@i bezier
 @i tick 
 @i mem
 @i sporth
