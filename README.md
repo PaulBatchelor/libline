@@ -1,7 +1,5 @@
 # libline
 
-A work in progress.
-
 A library for drawing sample-accurate lines and automation curves for 
 computer-based music composition. 
 
