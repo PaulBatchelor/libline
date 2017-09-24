@@ -785,10 +785,10 @@ ll_flt cy;
 #line 19 "./bezier.w"
 
 /*135:*/
-#line 33 "./bezier.w"
+#line 50 "./bezier.w"
 
 /*136:*/
-#line 62 "./bezier.w"
+#line 80 "./bezier.w"
 
 static ll_flt quadratic_equation(ll_flt a,ll_flt b,ll_flt c)
 {
@@ -803,22 +803,22 @@ return 0;
 }
 
 /*:136*//*137:*/
-#line 76 "./bezier.w"
+#line 114 "./bezier.w"
 
-static ll_flt find_t(ll_flt x1,ll_flt x2,ll_flt x3,int x)
+static ll_flt find_t(ll_flt x0,ll_flt x1,ll_flt x2,int x)
 {
 ll_flt a;
 ll_flt b;
 ll_flt c;
 
-a= (x1-2.0*x2+x3);
-b= 2.0*(-x1+x2);
-c= x1-x;
+a= (x0-2.0*x1+x2);
+b= 2.0*(-x0+x1);
+c= x0-x;
 
 if(a){
 return quadratic_equation(a,b,c);
 }else{
-return(x-x1)/b;
+return(x-x0)/b;
 }
 
 }
@@ -826,7 +826,7 @@ return(x-x1)/b;
 
 
 /*:137*/
-#line 34 "./bezier.w"
+#line 51 "./bezier.w"
 
 static ll_flt bezier_step(ll_point*pt,void*ud,UINT pos,UINT dur)
 {
@@ -855,7 +855,7 @@ return val;
 }
 
 /*:135*//*138:*/
-#line 98 "./bezier.w"
+#line 136 "./bezier.w"
 
 static void bezier_destroy(void*ud,void*ptr)
 {

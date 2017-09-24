@@ -29,7 +29,24 @@ void ll_bezier(ll_point *pt, ll_flt cx, ll_flt cy)
     ll_point_cb_destroy(pt, bezier_destroy);
 }
 
-@ This is the linear step function. 
+@ This is the bezier curve step function which computes a quadratic
+bezier line. The quadratic equation for a Bezier curve is the following:
+
+$$B(t) = (1 - t)^2 P_0 + 2(1 - t)tP_1 + t^2 P_2$$
+
+Where $t$ is a normalized time value between 0 and 1, and $P_n$ refers to a 
+2-dimensional point with a $(x,y)$ coordinate. 
+
+The issue with the classic equation above is that the value is derived from
+$t$, allowing $x$ to be fractional. This is problematic because the system 
+implemented here is discrete, restricted to whole-integer values of $x$.
+
+The solution to this problem is to rework the equation above to solve for $t$
+in terms of the current sample position $x_n$. Once $t$ is found, it 
+can be used to compute the result, which is the y component of the bezier 
+curve in terms of t. The reworked bezier equation is touched upon in greater
+detail in the |@<Quadratic Equation Solver@>| section.
+
 @<Static Functions for Bezier Point@>+=
 @<Quadratic Equation Solver@>@/
 static ll_flt bezier_step(ll_point *pt, void *ud, UINT pos, UINT dur)
@@ -58,7 +75,8 @@ static ll_flt bezier_step(ll_point *pt, void *ud, UINT pos, UINT dur)
     return val;
 }
 
-@
+@ The function below implements a quadratic equation solver for all 
+real values. Imaginary values return a value of 0.
 @<Quadratic Equation Solver@>+=
 static ll_flt quadratic_equation(ll_flt a, ll_flt b, ll_flt c)
 {
@@ -72,22 +90,42 @@ static ll_flt quadratic_equation(ll_flt a, ll_flt b, ll_flt c)
     }
 }
 
-@
+@ The Bezier x component $B_x$ can be rearranged to be a quadratic equation for 
+$t$, given the x bezier control points $x_0$, $x_1$, and $x_2$, as well as 
+the current sample position $x_n$. 
+
+$$\eqalign{
+    x_n &= (1 - t)^2 x_0 + 2(1 - t)tx_1 + t^2 x_2 \cr
+        &= (1 - 2t + t^2)x_0 + (2t - 2t^2)x_1 + t^2x_2 \cr
+        &= x_0 - 2tx_0 + t^2x_0 + 2tx_1 - 2t^2x_1 + t^2x_2 \cr
+        &= (x_0 - 2x_1 + x_2)t^2 + 2(-x_0 + x_1)t + x_0 \cr
+      0 &= (x_0 - 2x_1 + x_2)t^2 + 2(-x_0 + x_1)t + x_0 - x_n\cr
+}$$
+
+This yields the following $a$, $b$, and $c$ quadratic equation 
+coefficients:
+$$\eqalign{
+    a &= x_0 - 2x_1 + x2, \cr
+    b &= 2(-x_0 + x_1) \cr
+    c &= x_0 - x_n \cr
+}$$
+
+Using those variables, the value of $t$ can be found if it is a real value.
 @<Quadratic Equation Solver@>+=
-static ll_flt find_t(ll_flt x1, ll_flt x2, ll_flt x3, int x)
+static ll_flt find_t(ll_flt x0, ll_flt x1, ll_flt x2, int x)
 {
     ll_flt a;
     ll_flt b;
     ll_flt c;
 
-    a = (x1 - 2.0*x2 + x3);
-    b = 2.0*(-x1 + x2);
-    c = x1 - x;
+    a = (x0 - 2.0*x1 + x2);
+    b = 2.0*(-x0 + x1);
+    c = x0 - x;
 
     if(a) {
         return quadratic_equation(a, b, c);
     } else {
-        return (x - x1) / b;
+        return (x - x0) / b;
     }
 
 }
