@@ -1,3 +1,5 @@
+.PHONY: pdf
+
 NAME=libline
 
 DEFAULT = $(NAME).a debug
@@ -20,12 +22,13 @@ CFLAGS = -Wall -ansi -g -DLL_SPORTH_STANDALONE -DLL_SPORTH -pedantic
 
 ifdef USE_CWEB
 CTANGLE = ctangle
-DEFAULT += $(NAME).pdf
 else
 CTANGLE = echo ctangle
 endif
 
 default: $(DEFAULT) 
+
+pdf: $(NAME).pdf
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
