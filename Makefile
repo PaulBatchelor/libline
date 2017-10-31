@@ -1,3 +1,5 @@
+.PHONY: pdf
+
 NAME=libline
 
 DEFAULT = $(NAME).a debug
@@ -26,6 +28,8 @@ CTANGLE = echo ctangle
 endif
 
 default: $(DEFAULT) 
+
+pdf: $(NAME).pdf
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@

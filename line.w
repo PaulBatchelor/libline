@@ -26,7 +26,7 @@ sequential points.
 @<The Line@> += 
     unsigned int counter;
 
-@ The duration of the current point is in stored in the variable |idur|. This 
+@ The duration of the current point is stored in the variable |idur|. This 
 unit of this duration is in whole-{\bf i}nteger samples, which is the 
 justification for the "i" in the beginning of the variable.
 @<The Line@> += 
@@ -180,7 +180,7 @@ void ll_line_reset(ll_line *ln)
 
 @* Freeing Line Memory. 
 @ All things that must be allocated internally must then be freed using 
-the function |ll_line_free|. This function essentially walks through the 
+the function |ll_line_free|. This function walks through the 
 linked list and frees all the points. 
 @<The Line@> += 
 void ll_line_free(ll_line *ln)
