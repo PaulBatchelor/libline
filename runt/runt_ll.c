@@ -175,7 +175,6 @@ static runt_int node_ll(runt_vm *vm, runt_ptr p)
 static runt_int destroy_lines(runt_vm *vm, runt_ptr p)
 {
     runt_ll_d *ll;
-    runt_print(vm, "destroying lines...\n");
     ll = runt_to_cptr(p);
     ll_lines_free(ll->lines);
     free(ll->lines);
