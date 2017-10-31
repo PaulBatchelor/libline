@@ -190,6 +190,7 @@ static runt_int libline(runt_vm *vm, runt_ptr p)
     ll_define(vm, p, "add_exppoint", 12, add_exppoint);
     ll_define(vm, p, "add_step", 8, add_step);
     ll_define(vm, p, "node_ll", 7, node_ll);
+    runt_mark_set(vm);
     return runt_is_alive(vm);
 }
 
