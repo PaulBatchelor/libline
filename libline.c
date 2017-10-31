@@ -531,7 +531,7 @@ l->ud= ud;
 }
 
 /*:114*//*115:*/
-#line 71 "./lines.w"
+#line 72 "./lines.w"
 
 void ll_lines_free(ll_lines*l)
 {
@@ -551,7 +551,7 @@ entry= next;
 }
 
 /*:115*//*117:*/
-#line 94 "./lines.w"
+#line 95 "./lines.w"
 
 void ll_lines_append(ll_lines*l,ll_line**pline,ll_flt**val)
 {
@@ -578,7 +578,7 @@ l->ln= entry->ln;
 }
 
 /*:117*//*118:*/
-#line 123 "./lines.w"
+#line 124 "./lines.w"
 
 ll_line*ll_lines_current_line(ll_lines*l)
 {
@@ -586,7 +586,7 @@ return l->ln;
 }
 
 /*:118*//*120:*/
-#line 133 "./lines.w"
+#line 134 "./lines.w"
 
 void ll_lines_step(ll_lines*l)
 {
@@ -602,7 +602,7 @@ entry= entry->next;
 }
 
 /*:120*//*121:*/
-#line 151 "./lines.w"
+#line 152 "./lines.w"
 
 void ll_add_linpoint(ll_lines*l,ll_flt val,ll_flt dur)
 {
@@ -616,6 +616,13 @@ void ll_add_exppoint(ll_lines*l,ll_flt val,ll_flt dur,ll_flt curve)
 ll_point*pt;
 pt= ll_line_append(l->ln,val,dur);
 ll_exppoint(pt,curve);
+}
+
+void ll_add_bezier(ll_lines*l,ll_flt val,ll_flt dur,ll_flt cx,ll_flt cy)
+{
+ll_point*pt;
+pt= ll_line_append(l->ln,val,dur);
+ll_bezier(pt,cx,cy);
 }
 
 void ll_add_step(ll_lines*l,ll_flt val,ll_flt dur)

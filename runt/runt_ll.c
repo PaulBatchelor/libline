@@ -86,6 +86,39 @@ static runt_int add_exppoint(runt_vm *vm, runt_ptr p)
     return RUNT_OK;
 }
 
+static runt_int add_bezier(runt_vm *vm, runt_ptr p)
+{
+    runt_int rc;
+    runt_stacklet *s;
+    ll_flt val;
+    ll_flt dur;
+    ll_flt cx;
+    ll_flt cy;
+    runt_ll_d *rll;
+    
+    rc = runt_ppop(vm, &s);
+    RUNT_ERROR_CHECK(rc);
+    cy = s->f;
+    
+    rc = runt_ppop(vm, &s);
+    RUNT_ERROR_CHECK(rc);
+    cx = s->f;
+   
+    rc = runt_ppop(vm, &s);
+    RUNT_ERROR_CHECK(rc);
+    dur = s->f;
+    
+    rc = runt_ppop(vm, &s);
+    RUNT_ERROR_CHECK(rc);
+    val = s->f;
+  
+    rll = runt_to_cptr(p);
+
+    ll_add_bezier(rll->lines, val, dur, cx, cy);
+
+    return RUNT_OK;
+}
+
 static runt_int add_step(runt_vm *vm, runt_ptr p)
 {
     runt_int rc;
@@ -187,6 +220,7 @@ static runt_int libline(runt_vm *vm, runt_ptr p)
     ll_define(vm, p, "line_begin", 10, line_begin);
     ll_define(vm, p, "add_linpoint", 12, add_linpoint);
     ll_define(vm, p, "add_exppoint", 12, add_exppoint);
+    ll_define(vm, p, "add_bezier", 10, add_bezier);
     ll_define(vm, p, "add_step", 8, add_step);
     ll_define(vm, p, "node_ll", 7, node_ll);
     runt_mark_set(vm);

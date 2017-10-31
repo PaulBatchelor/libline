@@ -229,6 +229,7 @@ void ll_add_linpoint(ll_lines *l, ll_flt val, ll_flt dur);
 void ll_add_exppoint(ll_lines *l, ll_flt val, ll_flt dur, ll_flt curve);
 void ll_add_step(ll_lines *l, ll_flt val, ll_flt dur);
 void ll_add_tick(ll_lines *l, ll_flt dur);
+void ll_add_bezier(ll_lines *l, ll_flt val, ll_flt dur, ll_flt cx, ll_flt cy);
 void ll_end(ll_lines *l);
 void ll_timescale(ll_lines *l, ll_flt scale);
 void ll_timescale_bpm(ll_lines *l, ll_flt bpm);

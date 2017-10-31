@@ -164,6 +164,13 @@ void ll_add_exppoint(ll_lines *l, ll_flt val, ll_flt dur, ll_flt curve)
     ll_exppoint(pt, curve);
 }
 
+void ll_add_bezier(ll_lines *l, ll_flt val, ll_flt dur, ll_flt cx, ll_flt cy)
+{
+    ll_point *pt;
+    pt = ll_line_append(l->ln, val, dur);
+    ll_bezier(pt, cx, cy);
+}
+
 void ll_add_step(ll_lines *l, ll_flt val, ll_flt dur)
 {
     ll_line_append(l->ln, val, dur);
