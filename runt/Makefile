@@ -1,5 +1,6 @@
 default: all
 
+NAME=ll
 OBJ=runt_ll.o
 
 CFLAGS += -I$(HOME)/.runt/include
@@ -7,16 +8,24 @@ CFLAGS += -I../ -g
 LDFLAGS += -L../ -lline -lsporth -ldl
 LDFLAGS += -L$(HOME)/.runt/lib -lrunt -lrunt_patchwerk -lsoundpipe -lm -lsndfile
 
-all: librunt_ll.a rntll
+all: librunt_$(NAME).a rnt$(NAME)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-rntll: parse.c $(OBJ)
+rnt$(NAME): parse.c $(OBJ)
 	$(CC) $(CFLAGS) -o $@ $< $(OBJ) $(LDFLAGS)
 
-librunt_ll.a: $(OBJ)
+librunt_$(NAME).a: $(OBJ)
 	$(AR) rcs $@ $(OBJ)
 
+install: librunt_$(NAME).a rnt$(NAME)
+	mkdir -p ~/.runt/lib
+	mkdir -p ~/.runt/bin
+	mkdir -p ~/.runt/include
+	mkdir -p ~/.runt/plugins
+	cp librunt_$(NAME).a ~/.runt/lib
+	cp rnt$(NAME) ~/.runt/bin
+
 clean: 
-	rm -rf $(OBJ) rntll librunt_ll.a
+	rm -rf $(OBJ) rnt$(NAME) librunt_$(NAME).a
