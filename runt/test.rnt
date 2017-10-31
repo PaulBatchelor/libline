@@ -1,0 +1,13 @@
+patchwerk nodes libline
+
+5 alloc_nodes
+
+line_begin
+330 0.5 add_linpoint
+880 0.5 -3 add_exppoint
+500 0.5 add_step
+node_ll
+
+line_begin 0.3 2 add_linpoint 0 1 add_step node_ll sine out
+
+write_wav

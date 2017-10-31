@@ -67,7 +67,8 @@ void ll_lines_mem_callback(ll_lines *l, void *ud, ll_cb_malloc m, ll_cb_free f)
     l->ud = ud;
 }
 
-@ Write some words here.
+@ The function |ll_lines_free| frees all memory previously allocated using
+the internal free callback. 
 @<Lines@>+=
 void ll_lines_free(ll_lines *l)
 {
