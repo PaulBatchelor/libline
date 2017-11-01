@@ -1,11 +1,12 @@
 default: all
 
 NAME=ll
-OBJ=runt_ll.o
+OBJ=runt_ll.o ../libline.o
 
+CFLAGS += -DLL_SPORTH_STANDALONE
 CFLAGS += -I$(HOME)/.runt/include
 CFLAGS += -I../ -g
-LDFLAGS += -L../ -lline -lsporth -ldl
+LDFLAGS += -lsporth -ldl
 LDFLAGS += -L$(HOME)/.runt/lib -lrunt -lrunt_patchwerk -lsoundpipe -lm -lsndfile
 
 all: librunt_$(NAME).a rnt$(NAME)
