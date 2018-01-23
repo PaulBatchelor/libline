@@ -2,7 +2,7 @@
 
 NAME=libline
 
-DEFAULT = $(NAME).a debug
+DEFAULT = $(NAME).a 
 
 WEBFILES=$(NAME).w\
 		 header.w\
@@ -18,13 +18,7 @@ WEBFILES=$(NAME).w\
 
 LDFLAGS=-lsporth -lsoundpipe -lsndfile -lm -ldl
 
-CFLAGS = -Wall -ansi -g -DLL_SPORTH_STANDALONE -DLL_SPORTH -pedantic
-
-ifdef USE_CWEB
-CTANGLE = ctangle
-else
-CTANGLE = echo ctangle
-endif
+CFLAGS = -Wall -ansi -g -pedantic
 
 default: $(DEFAULT) 
 

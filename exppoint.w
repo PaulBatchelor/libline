@@ -8,7 +8,7 @@
 @<Exponential Point@>+=
 
 typedef struct {
-    SPFLOAT curve;
+    ll_flt curve;
 } exppoint;
 
 @ This function sets up the exponential point data struct |exppoint|.
