@@ -227,21 +227,30 @@ static runt_int libline(runt_vm *vm, runt_ptr p)
     return runt_is_alive(vm);
 }
 
-runt_int runt_load_ll(runt_vm *vm, runt_ptr patchwerk)
+runt_int runt_load_ll(runt_vm *vm)
 {
     runt_ptr p;
     runt_ll_d *ll;
-    sp_data *sp;
+    runt_ptr pw;
+    runt_int rc;
    
+    rc = rpw_plugin_data(vm, &pw);
+    RUNT_ERROR_CHECK(rc);
+
     ll = malloc(sizeof(runt_ll_d));
-    ll->patch = runt_to_cptr(patchwerk);
-    sp = pw_patch_ugens_get_data(ll->patch);
+    ll->patch = rpw_get_patch(pw);
     
     ll->lines = malloc(ll_lines_size());
-    ll_lines_init(ll->lines, sp->sr);
+    ll_lines_init(ll->lines, pw_patch_srate_get(ll->patch));
 
     p = runt_mk_cptr(vm, ll);
     ll_define(vm, p, "libline", 7, libline);
     runt_add_destructor(vm, destroy_lines, p);
+    return runt_is_alive(vm);
+}
+
+runt_int rplug_ll(runt_vm *vm)
+{
+    runt_load_ll(vm);
     return runt_is_alive(vm);
 }

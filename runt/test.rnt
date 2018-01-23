@@ -1,7 +1,5 @@
 patchwerk nodes libline
 
-5 alloc_nodes
-
 line_begin
 330 0.5 add_linpoint
 880 0.5 -3 add_exppoint

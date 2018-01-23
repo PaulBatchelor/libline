@@ -8,10 +8,9 @@ runt_ptr runt_load_patchwerk(runt_vm *vm);
 
 static runt_int loader(runt_vm *vm)
 {
-    runt_ptr p;
     runt_load_stdlib(vm);
-    p = runt_load_patchwerk(vm);
-    runt_load_ll(vm, p);
+    runt_load_patchwerk(vm);
+    runt_load_ll(vm);
     return RUNT_OK;
 }
 
